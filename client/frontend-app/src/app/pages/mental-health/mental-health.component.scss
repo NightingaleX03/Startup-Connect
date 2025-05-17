@@ -1,0 +1,81 @@
+.mental-health {
+  background: var(--secondary-color);
+  min-height: 100vh;
+  padding: 60px 0;
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--background-color);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(106, 90, 205, 0.08);
+    padding: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-weight: 500;
+        color: var(--text-color);
+      }
+
+      input[type="range"] {
+        accent-color: var(--accent-color);
+        width: 100%;
+      }
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 12px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      border: none;
+      margin-top: 1rem;
+      transition: background 0.2s;
+      &:hover {
+        background: var(--accent-color);
+      }
+    }
+  }
+
+  .ai-suggestions {
+    margin-top: 2.5rem;
+    h2 {
+      font-size: 1.3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    .placeholder-box {
+      background: var(--secondary-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: var(--text-color);
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(106, 90, 205, 0.05);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .mental-health .container {
+    padding: 1rem;
+  }
+} 

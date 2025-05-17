@@ -1,0 +1,118 @@
+.navbar {
+  background: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 2px solid var(--primary-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      height: 32px;
+      width: auto;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+
+      &:hover {
+        color: var(--primary-color);
+        background: rgba(106, 90, 205, 0.1);
+      }
+
+      &.active {
+        color: var(--primary-color);
+        background: rgba(106, 90, 205, 0.1);
+      }
+    }
+  }
+
+  .user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: rgba(106, 90, 205, 0.1);
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+      }
+
+      .user-name {
+        font-weight: 500;
+        color: var(--text-color);
+      }
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem;
+      min-width: 200px;
+      margin-top: 0.5rem;
+      border: 1px solid var(--primary-color);
+
+      .dropdown-item {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: background 0.2s;
+        border-radius: 4px;
+
+        &:hover {
+          background: rgba(106, 90, 205, 0.1);
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+} 

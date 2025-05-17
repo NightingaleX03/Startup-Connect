@@ -1,0 +1,116 @@
+.blog-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+  padding: 120px 0 60px;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    opacity: 0.9;
+  }
+}
+
+.blog-content {
+  padding: 60px 0;
+  background: var(--background-color);
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    .blog-content {
+      padding: 1.5rem;
+
+      .blog-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+
+        .category {
+          color: var(--primary-color);
+          font-weight: 600;
+        }
+
+        .date {
+          color: #64748b;
+        }
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
+
+      p {
+        color: #64748b;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .read-more {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+
+        &:hover {
+          color: var(--secondary-color);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-header {
+    padding: 100px 0 40px;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+
+  .blog-content {
+    padding: 40px 0;
+  }
+} 

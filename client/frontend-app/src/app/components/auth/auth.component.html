@@ -1,0 +1,90 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <h1>Welcome</h1>
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'login'" (click)="switchTab('login')">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'signup'" (click)="switchTab('signup')">Sign Up</a>
+      </li>
+    </ul>
+    <form *ngIf="activeTab === 'login'" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" [(ngModel)]="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <ng-container *ngIf="activeTab === 'signup'">
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button type="button" class="btn" (click)="signupType = 'startup'">Sign Up as Startup</button>
+        <button type="button" class="btn" (click)="signupType = 'vc'">Sign Up as VC</button>
+      </div>
+      <form *ngIf="signupType === 'startup'" (ngSubmit)="onSubmitStartup()">
+        <div class="form-group">
+          <label for="startupName">Startup Name</label>
+          <input id="startupName" type="text" class="form-control" [(ngModel)]="startupName" name="startupName" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" class="form-control" [(ngModel)]="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="telephone">Telephone</label>
+          <input id="telephone" type="tel" class="form-control" [(ngModel)]="telephone" name="telephone" required />
+        </div>
+        <div class="form-group">
+          <label for="size">Size of Startup</label>
+          <input id="size" type="text" class="form-control" [(ngModel)]="size" name="size" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" class="form-control" [(ngModel)]="password" name="password" required />
+        </div>
+        <div class="form-group">
+          <label for="repassword">Re-enter Password</label>
+          <input id="repassword" type="password" class="form-control" [(ngModel)]="repassword" name="repassword" required />
+        </div>
+        <div class="alert alert-danger" *ngIf="signupError">
+          {{ signupError }}
+        </div>
+        <button type="submit" class="btn">Sign Up as Startup</button>
+      </form>
+      <form *ngIf="signupType === 'vc'" (ngSubmit)="onSubmitVC()">
+        <div class="form-group">
+          <label for="vcName">Name</label>
+          <input id="vcName" type="text" class="form-control" [(ngModel)]="vcName" name="vcName" required />
+        </div>
+        <div class="form-group">
+          <label for="vcEmail">Email</label>
+          <input id="vcEmail" type="email" class="form-control" [(ngModel)]="vcEmail" name="vcEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="vcTelephone">Telephone</label>
+          <input id="vcTelephone" type="tel" class="form-control" [(ngModel)]="vcTelephone" name="vcTelephone" required />
+        </div>
+        <div class="form-group">
+          <label for="vcPassword">Password</label>
+          <input id="vcPassword" type="password" class="form-control" [(ngModel)]="vcPassword" name="vcPassword" required />
+        </div>
+        <div class="form-group">
+          <label for="vcRepassword">Re-enter Password</label>
+          <input id="vcRepassword" type="password" class="form-control" [(ngModel)]="vcRepassword" name="vcRepassword" required />
+        </div>
+        <div class="alert alert-danger" *ngIf="signupError">
+          {{ signupError }}
+        </div>
+        <button type="submit" class="btn">Sign Up as VC</button>
+      </form>
+    </ng-container>
+  </div>
+</div> 

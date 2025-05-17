@@ -1,0 +1,95 @@
+.social-hub {
+  background: var(--secondary-color);
+  min-height: 100vh;
+  padding: 60px 0;
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .create-post-card, .post-card {
+    background: var(--background-color);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(106, 90, 205, 0.08);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .create-post-card {
+    h2 {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .form-control {
+        border-radius: 12px;
+        border: 2px solid var(--secondary-color);
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: border 0.2s;
+        &:focus {
+          border: 2px solid var(--primary-color);
+        }
+      }
+      .btn-primary {
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 12px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border: none;
+        margin-top: 0.5rem;
+        transition: background 0.2s;
+        &:hover {
+          background: var(--accent-color);
+        }
+      }
+    }
+  }
+
+  .feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .post-card {
+    h3 {
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+    .comments {
+      background: var(--secondary-color);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      strong {
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .comment {
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .social-hub .container {
+    padding: 1rem;
+  }
+} 

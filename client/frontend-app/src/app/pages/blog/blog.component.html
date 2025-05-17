@@ -1,0 +1,27 @@
+<section class="blog-header">
+  <div class="container">
+    <h1>StartupConnect Blog</h1>
+    <p class="lead">Insights, stories, and updates from the startup ecosystem</p>
+  </div>
+</section>
+
+<section class="blog-content">
+  <div class="container">
+    <div class="blog-grid">
+      <article class="blog-card" *ngFor="let post of blogPosts">
+        <div class="blog-image">
+          <img [src]="post.image" [alt]="post.title">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="category">{{ post.category }}</span>
+            <span class="date">{{ post.date }}</span>
+          </div>
+          <h2>{{ post.title }}</h2>
+          <p>{{ post.excerpt }}</p>
+          <a [routerLink]="['/blog', post.slug]" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section> 

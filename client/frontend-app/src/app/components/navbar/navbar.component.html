@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <span class="brand-icon">🚀</span>
+      StartupConnect
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Not logged in -->
+      <ul class="navbar-nav me-auto" *ngIf="!authService.isLoggedIn()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
+        </li>
+      </ul>
+
+      <!-- Startup Navbar -->
+      <ul class="navbar-nav me-auto" *ngIf="authService.isLoggedIn() && authService.getUserType() === 'startup'">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/startup/profile']" routerLinkActive="active">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/startup/mental-health']" routerLinkActive="active">Mental Health</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/startup/social-hub']" routerLinkActive="active">Social Hub</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/startup/dashboard']" routerLinkActive="active">Dashboard</a>
+        </li>
+      </ul>
+
+      <!-- Auth Buttons -->
+      <div class="navbar-auth">
+        <button class="btn btn-signup" *ngIf="!authService.isLoggedIn()" routerLink="/auth">Sign Up / Sign In</button>
+        <button class="btn btn-logout" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,63 @@
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Where Startups Meet Their Perfect Match</h1>
+      <p class="lead">Connect with the right investors, get AI-powered insights, and grow your startup in a supportive community.</p>
+      <div class="hero-buttons">
+        <a routerLink="/auth" class="btn btn-primary">Get Started</a>
+        <a href="#features" class="btn btn-outline">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <div class="container">
+    <h2>Why Choose StartupConnect?</h2>
+    <div class="features-grid">
+      <div class="feature-card" *ngFor="let feature of features">
+        <div class="feature-icon">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <h2>What Our Community Says</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+        <div class="testimonial-content">
+          <p class="quote">"{{ testimonial.quote }}"</p>
+          <div class="author">
+            <img [src]="testimonial.image" [alt]="testimonial.author" class="author-image">
+            <div class="author-info">
+              <h4>{{ testimonial.author }}</h4>
+              <p>{{ testimonial.role }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Ready to Transform Your Startup Journey?</h2>
+      <p>Join thousands of startups and investors already on our platform.</p>
+      <div class="cta-buttons">
+        <a routerLink="/auth" class="btn btn-primary">Sign Up as Startup</a>
+        <a routerLink="/auth" class="btn btn-secondary">Sign Up as VC</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,3 +1,35 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-export const routes: Routes = [];
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { TeamComponent } from './pages/team/team.component';
+import { AuthCardComponent } from './pages/auth-card/auth-card.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
+import { FundingComponent } from './pages/funding/funding.component';
+import { SocialHubComponent } from './pages/social-hub/social-hub.component';
+import { AppComponent } from './app.component';
+import { AuthComponent } from './components/auth/auth.component';
+
+export const routes: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'about', component: AppComponent },
+  { path: 'team', component: AppComponent },
+  { path: 'profile', component: AppComponent },
+  { path: 'social-hub', component: AppComponent },
+  { path: 'dashboard', component: AppComponent },
+  { path: 'leaderboard', component: AppComponent },
+  { path: 'funding', component: AppComponent },
+  { path: '**', redirectTo: '' }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
