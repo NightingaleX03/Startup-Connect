@@ -9,15 +9,14 @@ def get_users():
 @users.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    return data
 
-    return jsonify({'user': username, 'password': password})
-
-@users.route('/signup', methods=['POST'])
-def login():
+@users.route('/signup/vc', methods=['POST'])
+def signup_vc():
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    return data
 
-    return jsonify({'user': username, 'password': password})
+@users.route('/signup/startup', methods=['POST'])
+def signup_startup():
+    data = request.get_json()
+    return data

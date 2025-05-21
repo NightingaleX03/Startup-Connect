@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,28 +12,12 @@ import { AuthService } from '../../services/auth.service';
   imports: [CommonModule, FormsModule]
 })
 export class AuthComponent {
+  // --- Tabs & States ---
   activeTab: 'login' | 'signup' = 'login';
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
-
-  // Signup logic
   signupType: 'startup' | 'vc' | null = null;
+
+  errorMessage: string = '';
   signupError: string = '';
-
-  // Startup signup fields
-  startupName: string = '';
-  email: string = '';
-  telephone: string = '';
-  size: string = '';
-  repassword: string = '';
-
-  // VC signup fields
-  vcName: string = '';
-  vcEmail: string = '';
-  vcTelephone: string = '';
-  vcPassword: string = '';
-  vcRepassword: string = '';
 
   constructor(
     private authService: AuthService,
@@ -43,56 +27,46 @@ export class AuthComponent {
   switchTab(tab: 'login' | 'signup'): void {
     this.activeTab = tab;
     this.errorMessage = '';
+    this.signupError = '';
     this.signupType = null;
-    this.signupError = '';
   }
 
-  onSubmit(): void {
+  onSubmitLogin(form: NgForm): void {
     this.errorMessage = '';
-    // if (this.activeTab === 'login') {
-    //   if (this.authService.login(this.username, this.password)) {
-    //     // Redirection is now handled by the auth service
-    //   } else {
-    //     this.errorMessage = 'Invalid credentials';
-    //   }
-    // }
-      this.authService.loginAuth(this.username, this.password).subscribe({
-        next: (res) => {
-          console.log('✅', res.message);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-        }
-      });
+
+    this.authService.login(form).subscribe({
+      next: (res) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Login failed';
+      }
+    });
   }
 
-  onSubmitStartup(): void {
+  onSubmitSignup(form: NgForm, userType: 'startup' | 'vc'): void {
     this.signupError = '';
-    if (this.password !== this.repassword) {
+
+    const { password, repassword } = form.value;
+    if (password !== repassword) {
       this.signupError = 'Passwords do not match.';
       return;
-    }
-    // Simulate signup logic (replace with real API call)
-    // For now, just log in as startup
-    if (this.authService.login(this.username, this.password)) {
-      // Redirection is now handled by the auth service
     } else {
-      this.signupError = 'Signup as startup is not implemented.';
+      
     }
+
+    // Adjust endpoint based on userType
+    const endpoint = userType === 'startup' ? 'signup/startup' : 'signup/vc';
+
+    this.authService.signup(endpoint, form).subscribe({
+      next: (res) => {
+        this.router.navigate(['/']);
+      },
+      error: err => {
+        this.signupError = err.error.message || `Signup as ${userType} failed.`;
+        console.error(err);
+      }
+    });
   }
 
-  onSubmitVC(): void {
-    this.signupError = '';
-    if (this.vcPassword !== this.vcRepassword) {
-      this.signupError = 'Passwords do not match.';
-      return;
-    }
-    // Simulate signup logic (replace with real API call)
-    // For now, just log in as VC
-    if (this.authService.login(this.vcName, this.vcPassword)) {
-      // Redirection is now handled by the auth service
-    } else {
-      this.signupError = 'Signup as VC is not implemented.';
-    }
-  }
-} 
+}
