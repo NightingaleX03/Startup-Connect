@@ -6,14 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TeamComponent } from './pages/team/team.component';
-import { AuthCardComponent } from './pages/auth-card/auth-card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { FundingComponent } from './pages/funding/funding.component';
 import { SocialHubComponent } from './pages/social-hub/social-hub.component';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { AuthComponent } from './pages/auth/auth.component';
 
 export const routes: Routes = [
   { path: '', component: AppComponent },

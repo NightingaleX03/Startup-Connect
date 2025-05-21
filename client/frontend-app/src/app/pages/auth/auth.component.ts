@@ -49,13 +49,21 @@ export class AuthComponent {
 
   onSubmit(): void {
     this.errorMessage = '';
-    if (this.activeTab === 'login') {
-      if (this.authService.login(this.username, this.password)) {
-        // Redirection is now handled by the auth service
-      } else {
-        this.errorMessage = 'Invalid credentials';
-      }
-    }
+    // if (this.activeTab === 'login') {
+    //   if (this.authService.login(this.username, this.password)) {
+    //     // Redirection is now handled by the auth service
+    //   } else {
+    //     this.errorMessage = 'Invalid credentials';
+    //   }
+    // }
+      this.authService.loginAuth(this.username, this.password).subscribe({
+        next: (res) => {
+          console.log('✅', res.message);
+        },
+        error: (err) => {
+          this.errorMessage = err.error.message;
+        }
+      });
   }
 
   onSubmitStartup(): void {

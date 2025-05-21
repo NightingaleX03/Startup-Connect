@@ -1,9 +1,12 @@
 from flask import Flask
 from database import test_connection
 from auth.routes import users
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.register_blueprint(users, url_prefix='/users')
+CORS(app)
+
+app.register_blueprint(users, url_prefix='/auth')
 
 @app.route('/')
 def hello():
