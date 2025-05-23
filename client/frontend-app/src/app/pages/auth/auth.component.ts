@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { LoginModel, SignupModel } from './auth.model';
 
 @Component({
   selector: 'app-auth',
@@ -12,12 +13,25 @@ import { AuthService } from '../../services/auth.service';
   imports: [CommonModule, FormsModule]
 })
 export class AuthComponent {
-  // --- Tabs & States ---
+
   activeTab: 'login' | 'signup' = 'login';
-  signupType: 'startup' | 'vc' | null = null;
 
   errorMessage: string = '';
   signupError: string = '';
+
+  login: LoginModel = {
+    name: '',
+    password: ''
+  };
+
+  signup: SignupModel = {
+    name: '',
+    type: 'startup', 
+    email: '',
+    phone: '',
+    password: ''
+  };
+  repassword: string = '';
 
   constructor(
     private authService: AuthService,
@@ -28,15 +42,20 @@ export class AuthComponent {
     this.activeTab = tab;
     this.errorMessage = '';
     this.signupError = '';
-    this.signupType = null;
   }
 
-  onSubmitLogin(form: NgForm): void {
+  onSubmitLogin(): void {
     this.errorMessage = '';
 
-    this.authService.login(form).subscribe({
+    this.authService.login(this.login).subscribe({
       next: (res) => {
-        this.router.navigate(['/']);
+        if (res.userType === 'startup') {
+          this.router.navigate(['/startup/profile']);
+        } else if (res.userType === 'vc') {
+          this.router.navigate(['/startup/profile']);
+        } else {
+          this.router.navigate(['/startup/profile']);
+        }
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
@@ -44,29 +63,26 @@ export class AuthComponent {
     });
   }
 
-  onSubmitSignup(form: NgForm, userType: 'startup' | 'vc'): void {
+  onSubmitSignup(): void {
     this.signupError = '';
 
-    const { password, repassword } = form.value;
-    if (password !== repassword) {
+    if (this.signup.password !== this.repassword) {
       this.signupError = 'Passwords do not match.';
       return;
-    } else {
-      
-    }
+    } 
 
     // Adjust endpoint based on userType
-    const endpoint = userType === 'startup' ? 'signup/startup' : 'signup/vc';
+    const endpoint = this.signup.type === 'startup' ? 'signup/startup' : 'signup/vc';
 
-    this.authService.signup(endpoint, form).subscribe({
-      next: (res) => {
-        this.router.navigate(['/']);
+    this.authService.signup(endpoint, this.signup).subscribe({
+      next: (res) => { 
+        this.router.navigate(['/']);  
       },
-      error: err => {
-        this.signupError = err.error.message || `Signup as ${userType} failed.`;
-        console.error(err);
+      error: (err) => {
+        this.errorMessage = err.error.message || 'Login failed';
       }
     });
+
   }
 
 }

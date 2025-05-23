@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { LoginModel, SignupModel } from '../pages/auth/auth.model';
 
 export interface User {
   userType: 'startup' | 'vc' | null;
@@ -24,8 +25,8 @@ export class AuthService {
 
   }
 
-  login(formData: NgForm): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, formData.value).pipe(
+  login(user: LoginModel): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, user).pipe(
       tap((response: any) => {
 
         const user: User = {
@@ -34,24 +35,18 @@ export class AuthService {
         };
 
         localStorage.setItem('currentUser', JSON.stringify(user));
-
-        if (user.userType === 'startup') {
-          this.router.navigate(['/startup/profile']);
-        } else if (user.userType === 'vc') {
-          this.router.navigate(['/']);
-        }
         
       })
     );
   }
 
-  signup(endpoint: string, formData: NgForm): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${endpoint}`, formData.value).pipe(
+  signup(endpoint: string, user: SignupModel): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${endpoint}`, user).pipe(
       tap(res => {
         const user = { ...res };
-
         localStorage.setItem('user', JSON.stringify(user));
       })
+
     );
   }
 
