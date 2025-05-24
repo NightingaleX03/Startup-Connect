@@ -1,0 +1,19 @@
+.local-groups-root { width: 100%; padding-top: 0; margin-top: 0; height: 100%; min-height: 0; display: flex; flex-direction: column; }
+.tabs { display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1.5px solid var(--primary-color); }
+.tabs button { flex: 1; padding: 0.5rem 1rem; border: none; background: #222; color: #fff; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 600; margin-bottom: -1.5px; }
+.tabs button.active { background: var(--primary-color); color: #fff; }
+.tab-content-scroll { flex: 1; overflow-y: auto; min-height: 0; padding-top: 0; background: var(--background-color); border-radius: 0 0 12px 12px; }
+.group-cards { display: flex; flex-wrap: wrap; gap: 1rem; }
+.group-card { background: var(--background-color); border: 2px solid var(--primary-color); border-radius: 12px; padding: 1rem 1.5rem; min-width: 180px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.group-title { font-weight: 700; color: var(--accent-color); margin-bottom: 0.5rem; text-align: center; }
+.group-actions { display: flex; gap: 0.5rem; }
+.group-actions button { background: var(--button-color); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 0.8rem; cursor: pointer; font-size: 0.95rem; }
+.group-actions button:disabled { background: #888; cursor: not-allowed; }
+.search-bar { width: 60%; padding: 0.5rem; margin-bottom: 1rem; border-radius: 8px; border: 2px solid var(--primary-color); }
+.create-btn { margin-left: 1rem; background: var(--accent-color); color: #fff; border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; margin-bottom: 1rem; }
+.empty-msg { color: #aaa; text-align: center; margin: 2rem 0; }
+.group-list { width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
+.group-row { display: flex; align-items: center; justify-content: space-between; background: var(--background-color); border: 1.5px solid var(--primary-color); border-radius: 8px; padding: 0.7rem 1rem; margin-bottom: 0.2rem; }
+.group-name { font-weight: 500; color: var(--text-color); }
+.group-row button { background: var(--button-color); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1.2rem; cursor: pointer; font-size: 0.95rem; }
+.group-row button:disabled { background: #888; cursor: not-allowed; } 

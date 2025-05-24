@@ -110,6 +110,23 @@
       box-shadow: 0 2px 8px rgba(106, 90, 205, 0.05);
     }
   }
+
+  .local-groups.custom-card {
+    height: 700px;
+    min-height: 700px;
+    max-height: 700px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    border: none !important;
+    box-shadow: none;
+  }
+
+  .custom-card:hover {
+    transform: none !important;
+  }
 }
 
 @media (max-width: 700px) {
