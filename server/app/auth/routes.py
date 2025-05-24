@@ -1,17 +1,32 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect, url_for
+from flask_login import login_user, logout_user
 from .models import User
 from database import db
 
 users = Blueprint('user', __name__)
 
-@users.route('/list', methods=['GET'])
-def get_users():
-    return jsonify({"message": "List of users"})
-
 @users.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    return data
+
+    username = data['name']
+    password = data['password']
+
+    user = User.query.filter_by(name=username).first()
+
+    if user and user.password == password:
+        return jsonify({
+            "message": "Login successful",
+            "username": user.name,
+            "userType": user.type
+        }), 200
+    else:
+        return 'Invalid username or password', 401
+
+@users.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @users.route('/signup', methods=['POST'])
 def signup():

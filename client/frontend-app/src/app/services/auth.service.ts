@@ -29,9 +29,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, user).pipe(
       tap((response: any) => {
 
-        const user: User = {
-          userType: response.userType,  
-          token: response.token || ''   
+        const user = {
+          userType: response.userType,
+          username: response.username,
+          token: response.token || ''
         };
 
         localStorage.setItem('currentUser', JSON.stringify(user));
