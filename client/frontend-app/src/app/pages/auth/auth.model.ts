@@ -10,7 +10,7 @@ export interface LoginModel {
 
 export interface SignupModel {
   name: string;
-  type: UserType;
+  type: string;
   email: string;
   phone: string;
   password: string;

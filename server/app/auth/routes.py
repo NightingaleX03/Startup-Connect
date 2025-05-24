@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from .models import User
+from database import db
 
 users = Blueprint('user', __name__)
 
@@ -14,4 +16,23 @@ def login():
 @users.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
-    return data
+
+    try:
+        new_user = User(
+            name=data['name'],
+            type=data['type'],
+            email=data['email'],
+            telephone=data['phone'],
+            password=data['password']
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message": "User created successfully"}), 201
+    
+    except Exception as e:
+        db.session.rollback()
+        print(f"Signup error: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+    finally:
+        db.session.close()
