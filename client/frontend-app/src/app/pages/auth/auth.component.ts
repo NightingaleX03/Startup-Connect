@@ -75,6 +75,7 @@ export class AuthComponent {
 
     this.authService.signup(this.signup).subscribe({
       next: (res) => {  
+        this.switchTab('login');
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
