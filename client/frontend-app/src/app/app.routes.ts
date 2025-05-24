@@ -13,6 +13,7 @@ import { FundingComponent } from './pages/funding/funding.component';
 import { SocialHubComponent } from './pages/social-hub/social-hub.component';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './pages/auth/auth.component';
+import { AuthGuard } from './pages/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: AppComponent },
@@ -21,7 +22,7 @@ export const routes: Routes = [
   { path: 'team', component: TeamComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'social-hub', component: SocialHubComponent },
-  { path: 'dashboard/:username', component: DashboardComponent },
+  { path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'funding', component: FundingComponent },
   { path: '**', redirectTo: '' }
