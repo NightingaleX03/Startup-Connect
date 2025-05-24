@@ -1,15 +1,20 @@
 <section class="dashboard-page">
   <div class="container">
     <div class="dashboard-card">
-      <h1>Startup Dashboard</h1>
       <div class="dashboard-grid">
-      <div class="profile-shortcut box">Profile Shortcut</div>
-      <div class="local-groups box">Local Groups</div>
-      <div class="leaderboard box">Leaderboard</div>
-      <div class="update box">Update</div>
-      <div class="news box">News</div>
-      <div class="update box">Update</div>
-    </div>
+        <div class="profile-shortcut custom-card">
+          <app-startup-profile-card></app-startup-profile-card>
+        </div>
+        <div class="local-groups custom-card">
+          <app-local-groups></app-local-groups>
+        </div>
+        <div class="leaderboard custom-card">
+          <app-leaderboard></app-leaderboard>
+        </div>
+        <div class="update1 custom-card">Update</div>
+        <div class="news custom-card">News</div>
+        <div class="update2 custom-card">Linked-in Updates</div>
+      </div>
     </div>
   </div>
 </section>

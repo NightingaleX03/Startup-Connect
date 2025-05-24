@@ -1,0 +1,31 @@
+<div class="leaderboard-container">
+  <h2 class="leaderboard-title">Startup Leaderboard</h2>
+  
+  <!-- Error message -->
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+  
+  <!-- Loading state -->
+  <div *ngIf="!error && !startups$" class="no-data">
+    Loading leaderboard data...
+  </div>
+  
+  <!-- Leaderboard list -->
+  <div class="leaderboard-list" *ngIf="startups$ | async as startups">
+    <div class="leaderboard-item" *ngFor="let startup of startups">
+      <div class="rank-badge" [ngClass]="{'top-three': startup.rank <= 3}">
+        {{startup.rank}}{{getRankSuffix(startup.rank)}}
+      </div>
+      
+      <div class="startup-info">
+        <img [src]="startup.profilePicture" [alt]="startup.name" class="startup-avatar">
+        <span class="startup-name">{{startup.name}}</span>
+      </div>
+      
+      <div class="points">
+        {{startup.points | number}} pts
+      </div>
+    </div>
+  </div>
+</div> 

@@ -34,6 +34,8 @@ export class AuthComponent {
   UserType = UserType;
   repassword: string = '';
 
+  currentYear = new Date().getFullYear();
+
   constructor(
     private authService: AuthService,
     private router: Router

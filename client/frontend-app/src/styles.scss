@@ -11,6 +11,16 @@
   --button-hover: #473577;
 }
 
+[data-theme="light"] {
+  --primary-color: #6b69d2;    
+  --secondary-color: #ffffff;
+  --accent-color: #b153c6; 
+  --text-color: #000000;
+  --background-color: #ffffff;
+  --button-color: #b153c6;
+  --button-hover: #473577;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -22,6 +32,13 @@ body {
 
 main {
   padding-top: 80px;
+  flex: 1 0 auto;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
