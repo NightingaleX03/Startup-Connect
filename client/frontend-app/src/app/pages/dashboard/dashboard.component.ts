@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
 import { LocalGroupsComponent } from '../../components/local-groups/local-groups.component';
 import { LeaderboardComponent } from '../../components/leaderboard/leaderboard.component';
