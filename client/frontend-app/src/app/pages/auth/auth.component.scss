@@ -22,7 +22,7 @@
   h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(#fff);
     text-align: center;
     margin-bottom: 1.5rem;
   }
@@ -33,7 +33,7 @@
     gap: 1rem;
     margin-bottom: 2rem;
     .nav-link {
-      color: var(--primary-color);
+      color: var(--white);
       border: none;
       background: none;
       font-weight: 600;
@@ -74,9 +74,9 @@
   }
 
   .alert-danger {
-    background: #fff;
-    color: #000;
-    border: 2px solid #ff0000;
+    background: #610707;
+    color: #fff;
+    border: 2px solid #610707;
     border-radius: 8px;
     padding: 1rem;
     margin-top: 1rem;
