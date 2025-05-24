@@ -1,12 +1,12 @@
 // Variables
 :root {
-  --primary-color: #2563eb;
-  --secondary-color: #4f46e5;
-  --accent-color: #7c3aed;
-  --background-color: #f8fafc;
-  --text-color: #1e293b;
+  --primary-color: #6b69d2;
+  --secondary-color: #000000;
+  --accent-color: #b153c6;
+  --background-color: #000000;
+  --text-color: #ffffff;
   --white: #ffffff;
-  --light-gray: #f1f5f9;
+  --light-gray: #000000;
   --border-radius: 8px;
   --transition: all 0.3s ease;
 }
@@ -18,7 +18,7 @@
 // Hero Section
 .hero {
   position: relative;
-  background: linear-gradient(135deg, var(--primary-color) 60%, var(--accent-color) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: var(--white);
   padding: 120px 0 80px;
   overflow: hidden;
@@ -63,9 +63,9 @@
           border: 2px solid var(--primary-color);
 
           &:hover {
-            background: var(--accent-color);
+            background: var(--white);
             color: var(--white);
-            border-color: var(--accent-color);
+            border-color: var(--white);
           }
         }
 
@@ -94,14 +94,14 @@
 // Features Section
 .features {
   padding: 100px 0;
-  background: linear-gradient(90deg, var(--background-color) 60%, #e0e7ff 100%);
+  background: var(--background-color);  // Changed to solid black
 
   h2 {
     text-align: center;
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 3rem;
-    color: var(--primary-color);
+    color: var(--white);
   }
 
   .features-grid {
@@ -123,6 +123,9 @@
       transform: translateY(-5px);
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
       border-color: var(--accent-color);
+      h3{
+        color: var(--primary-color);
+      }
     }
 
     .feature-icon {
@@ -135,7 +138,7 @@
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      color: var(--primary-color);
+      color: var(--accent-color);
     }
 
     p {
@@ -218,7 +221,7 @@
 // CTA Section
 .cta {
   padding: 100px 0;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(180deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   color: var(--white);
 
   .cta-content {
