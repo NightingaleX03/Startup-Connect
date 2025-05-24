@@ -11,7 +11,7 @@ def login():
     data = request.get_json()
     return data
 
-@users.route('/signup/vc', methods=['POST'])
+@users.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
     return data
