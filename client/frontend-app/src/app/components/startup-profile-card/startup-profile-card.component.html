@@ -1,0 +1,29 @@
+<div class="startup-profile-card">
+  <div class="top-row">
+    <img [src]="profile.avatar" alt="Profile Picture" class="avatar" />
+    <div class="profile-info">
+      <h2 class="startup-name">{{ profile.name }}</h2>
+      <div class="info-row">
+        <span class="plain-info">{{ profile.size }} employees</span>
+        <span class="plain-info">{{ profile.location }}</span>
+      </div>
+      <div class="pill primary-pill">Founded on: <span class="white">{{ profile.foundedOn }}</span></div>
+      <div class="pill primary-pill">Founded by: <span class="white">{{ profile.foundedBy }}</span></div>
+    </div>
+  </div>
+  <div class="tags-row centered-tags">
+    <span *ngFor="let tag of profile.tags" class="tag-pill">{{ tag }}</span>
+  </div>
+  <div class="pill description">{{ profile.description }}</div>
+  <div class="icon-row less-gap">
+    <button *ngIf="profile.instagram" class="icon-btn" (click)="onIconClick('instagram')" aria-label="Instagram">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+    </button>
+    <button *ngIf="profile.linkedin" class="icon-btn" (click)="onIconClick('linkedin')" aria-label="LinkedIn">
+      <span class="l-icon">L</span>
+    </button>
+    <button *ngIf="profile.email" class="icon-btn" (click)="onIconClick('email')" aria-label="Email">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+    </button>
+  </div>
+</div> 

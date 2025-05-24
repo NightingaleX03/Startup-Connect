@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from '../profile/profile.component';
-import { LocalGroupsComponent } from '../local-groups/local-groups.component';
+import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
+import { LocalGroupsComponent } from '../../components/local-groups/local-groups.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ProfileComponent, LocalGroupsComponent],
+  imports: [CommonModule, StartupProfileCardComponent, LocalGroupsComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
