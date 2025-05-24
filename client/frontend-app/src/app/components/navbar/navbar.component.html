@@ -40,6 +40,9 @@
 
       <!-- Auth Buttons -->
       <div class="navbar-auth">
+        <div class="theme-toggle" (click)="toggleTheme()" title="Change theme">
+          <span class="gear-emoji">⚙️</span>
+        </div>
         <button class="btn btn-signup" *ngIf="!authService.isLoggedIn()" routerLink="/auth">Sign Up / Sign In</button>
         <button class="btn btn-logout" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
       </div>

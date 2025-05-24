@@ -11,6 +11,16 @@
   --button-hover: #473577;
 }
 
+[data-theme="light"] {
+  --primary-color: #6b69d2;    
+  --secondary-color: #ffffff;
+  --accent-color: #b153c6; 
+  --text-color: #000000;
+  --background-color: #ffffff;
+  --button-color: #b153c6;
+  --button-hover: #473577;
+}
+
 body {
   margin: 0;
   padding: 0;
