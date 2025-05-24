@@ -43,18 +43,20 @@
 
 .dashboard-grid {
   display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
     "profile profile local"
     "leader update1 news"
     "leader update2 news";
-  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 .profile-shortcut { grid-area: profile; }
 .local-groups { grid-area: local; }
 .leaderboard { grid-area: leader; }
-.update:nth-of-type(1) { grid-area: update1; }
-.update:nth-of-type(2) { grid-area: update2; }
+.update1 { grid-area: update1; }
+.update2 { grid-area: update2; }
 .news { grid-area: news; }
 
 .box {
@@ -62,4 +64,17 @@
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+.custom-card {
+  background: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  min-height: 100px;
 }
