@@ -1,3 +1,8 @@
+export enum UserType {
+  Startup = 'startup',
+  VC = 'vc'
+}
+
 export interface LoginModel {
   name: string;
   password: string;

@@ -29,9 +29,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, user).pipe(
       tap((response: any) => {
 
-        const user: User = {
-          userType: response.userType,  
-          token: response.token || ''   
+        const user = {
+          userType: response.userType,
+          username: response.username,
+          token: response.token || ''
         };
 
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -40,11 +41,10 @@ export class AuthService {
     );
   }
 
-  signup(endpoint: string, user: SignupModel): Observable<any> {
-    return this.http.post(`${this.baseUrl}/${endpoint}`, user).pipe(
+  signup(user: SignupModel): Observable<any> {
+    return this.http.post(`${this.baseUrl}/signup`, user).pipe(
       tap(res => {
-        const user = { ...res };
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(res));
       })
 
     );
