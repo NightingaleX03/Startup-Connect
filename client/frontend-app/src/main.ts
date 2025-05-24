@@ -11,7 +11,7 @@ const routes = [
   { path: 'startup/profile', loadComponent: () => import('./app/pages/profile/profile.component').then(m => m.ProfileComponent) },
   { path: 'startup/mental-health', loadComponent: () => import('./app/pages/mental-health/mental-health.component').then(m => m.MentalHealthComponent) },
   { path: 'startup/social-hub', loadComponent: () => import('./app/pages/social-hub/social-hub.component').then(m => m.SocialHubComponent) },
-  { path: 'startup/dashboard', loadComponent: () => import('./app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
+  { path: 'dashboard/:username', loadComponent: () => import('./app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
   { path: '**', redirectTo: '' }
 ];
 

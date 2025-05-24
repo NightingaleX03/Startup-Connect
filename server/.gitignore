@@ -1,1 +1,6 @@
 .env
+
+# Alembic-related ignores
+*.pyc
+__pycache__/
+*.log

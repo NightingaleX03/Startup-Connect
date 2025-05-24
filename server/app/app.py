@@ -21,6 +21,10 @@ app.register_blueprint(users, url_prefix='/auth')
 def hello():
     return "Hello, World!"
 
+@app.route('/dashboard')
+def home():
+    return "Dashboard"
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

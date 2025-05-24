@@ -17,13 +17,13 @@ import { AuthComponent } from './pages/auth/auth.component';
 export const routes: Routes = [
   { path: '', component: AppComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'about', component: AppComponent },
-  { path: 'team', component: AppComponent },
-  { path: 'profile', component: AppComponent },
-  { path: 'social-hub', component: AppComponent },
-  { path: 'dashboard', component: AppComponent },
-  { path: 'leaderboard', component: AppComponent },
-  { path: 'funding', component: AppComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'team', component: TeamComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'social-hub', component: SocialHubComponent },
+  { path: 'dashboard/:username', component: DashboardComponent },
+  { path: 'leaderboard', component: LeaderboardComponent },
+  { path: 'funding', component: FundingComponent },
   { path: '**', redirectTo: '' }
 ];
 

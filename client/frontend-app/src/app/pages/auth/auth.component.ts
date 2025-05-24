@@ -50,13 +50,14 @@ export class AuthComponent {
 
     this.authService.login(this.login).subscribe({
       next: (res) => {
-        if (res.userType === 'startup') {
-          this.router.navigate(['/startup/profile']);
-        } else if (res.userType === 'vc') {
-          this.router.navigate(['/startup/profile']);
-        } else {
-          this.router.navigate(['/startup/profile']);
-        }
+
+        const user = {
+          username: res.username,
+          userType: res.userType,
+          token: res.token || ''
+        };
+        this.router.navigate([`/dashboard/${user.username}`]);
+       
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
@@ -73,8 +74,7 @@ export class AuthComponent {
     } 
 
     this.authService.signup(this.signup).subscribe({
-      next: (res) => { 
-        this.router.navigate(['/']);  
+      next: (res) => {  
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
