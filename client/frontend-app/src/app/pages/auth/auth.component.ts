@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { LoginModel, SignupModel } from './auth.model';
+import { LoginModel, SignupModel, UserType } from './auth.model';
 
 @Component({
   selector: 'app-auth',
@@ -26,11 +26,12 @@ export class AuthComponent {
 
   signup: SignupModel = {
     name: '',
-    type: 'startup', 
+    type: UserType.Startup, 
     email: '',
     phone: '',
     password: ''
   };
+  UserType = UserType;
   repassword: string = '';
 
   constructor(
@@ -71,10 +72,7 @@ export class AuthComponent {
       return;
     } 
 
-    // Adjust endpoint based on userType
-    const endpoint = this.signup.type === 'startup' ? 'signup/startup' : 'signup/vc';
-
-    this.authService.signup(endpoint, this.signup).subscribe({
+    this.authService.signup(this.signup).subscribe({
       next: (res) => { 
         this.router.navigate(['/']);  
       },

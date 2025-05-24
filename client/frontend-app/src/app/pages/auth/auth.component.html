@@ -27,8 +27,8 @@
 
     <ng-container *ngIf="activeTab === 'signup'">
       <div style="display: flex; gap: 1rem; justify-content: center;">
-        <button type="button" class="btn" (click)="this.signup.type = 'startup'">Sign Up as Startup</button>
-        <button type="button" class="btn" (click)="this.signup.type = 'vc'">Sign Up as VC</button>
+        <button type="button" class="btn" (click)="this.signup.type = UserType.Startup">Sign Up as Startup</button>
+        <button type="button" class="btn" (click)="this.signup.type = UserType.VC">Sign Up as VC</button>
       </div>
 
       <form #startupSignupForm="ngForm" (ngSubmit)="onSubmitSignup()">
@@ -55,7 +55,7 @@
         <div class="alert alert-danger" *ngIf="signupError">
           {{ signupError }}
         </div>
-        <button type="submit" class="btn">Sign Up as Startup</button>
+        <button type="submit" class="btn">Sign Up</button>
       </form>
       
     </ng-container>
