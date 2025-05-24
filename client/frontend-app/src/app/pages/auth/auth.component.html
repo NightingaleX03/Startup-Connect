@@ -26,10 +26,14 @@
     </form>
 
     <ng-container *ngIf="activeTab === 'signup'">
-      <div style="display: flex; gap: 1rem; justify-content: center;">
-        <button type="button" class="btn" (click)="this.signup.type = 'startup'">Sign Up as Startup</button>
-        <button type="button" class="btn" (click)="this.signup.type = 'vc'">Sign Up as VC</button>
-      </div>
+      <ul class="nav nav-tabs signup-type-tabs" style="justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="signup.type === 'startup'" (click)="signup.type = 'startup'">Startup</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="signup.type === 'vc'" (click)="signup.type = 'vc'">VC</a>
+        </li>
+      </ul>
 
       <form #startupSignupForm="ngForm" (ngSubmit)="onSubmitSignup()">
         <div class="form-group">
@@ -55,9 +59,9 @@
         <div class="alert alert-danger" *ngIf="signupError">
           {{ signupError }}
         </div>
-        <button type="submit" class="btn">Sign Up as Startup</button>
+        <button type="submit" class="btn">Sign Up as {{ signup.type === 'startup' ? 'Startup' : 'VC' }}</button>
       </form>
       
     </ng-container>
   </div>
-</div> 
+</div>

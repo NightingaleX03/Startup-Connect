@@ -33,6 +33,8 @@ export class AuthComponent {
   };
   repassword: string = '';
 
+  currentYear = new Date().getFullYear();
+
   constructor(
     private authService: AuthService,
     private router: Router

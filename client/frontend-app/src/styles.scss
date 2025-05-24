@@ -32,6 +32,13 @@ body {
 
 main {
   padding-top: 80px;
+  flex: 1 0 auto;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
