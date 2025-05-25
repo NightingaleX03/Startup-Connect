@@ -1,0 +1,46 @@
+<section class="profile-grid-wrapper">
+  <div class="parent">
+    <!-- Profile Section -->
+    <div class="div1">
+      <app-startup-profile-card></app-startup-profile-card>
+    </div>
+
+    <!-- Pitch Deck Section -->
+    <div class="div2">
+      <div class="pitch-title">Pitch Deck</div>
+      <div class="pitch-upload">
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf,.json,.csv" />
+        <div class="or-divider">or</div>
+        <textarea [(ngModel)]="pitchText" placeholder="Type or paste your pitch here..."></textarea>
+        <button class="btn btn-primary" (click)="sendPitch()">Send</button>
+        <div class="pitch-preview" *ngIf="pitchPreview">
+          <strong>Preview:</strong>
+          <pre>{{ pitchPreview }}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wellness Score Section -->
+    <div class="div3">
+      <div class="wellness-header">Wellness Score</div>
+      <div class="github-activity-grid">
+        <!-- Placeholder for GitHub activity grid -->
+        <div class="activity-row" *ngFor="let row of [0,1,2,3,4,5,6]">
+          <span class="activity-cell" *ngFor="let col of [0,1,2,3,4,5,6,7,8,9,10,11,12,13]" [ngClass]="{'active': (row+col)%3===0}"></span>
+        </div>
+      </div>
+      <div class="happiness-score">Happiness: <span>{{ happinessScore }}</span></div>
+      <a class="todays-entry-link" routerLink="/wellness-entry">Today's Entry/Quiz</a>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="div4">
+      <div class="quick-links-title">Quick Links</div>
+      <ul class="quick-links-list">
+        <li><a href="#">link1</a></li>
+        <li><a href="#">link2</a></li>
+        <li><a href="#">link3</a></li>
+      </ul>
+    </div>
+  </div>
+</section> 
