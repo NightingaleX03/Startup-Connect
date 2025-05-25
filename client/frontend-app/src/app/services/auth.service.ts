@@ -25,6 +25,11 @@ export class AuthService {
 
   }
 
+  clearAuthData(): void {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('user');  
+  }
+
   login(user: LoginModel): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, user).pipe(
       tap((response: any) => {
@@ -51,7 +56,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    this.clearAuthData();
     this.router.navigate(['/']);
   }
 
