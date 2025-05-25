@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { LoginModel, SignupModel } from './auth.model';
+import { LoginModel, SignupModel, UserType } from './auth.model';
 
 @Component({
   selector: 'app-auth',
@@ -26,11 +26,12 @@ export class AuthComponent {
 
   signup: SignupModel = {
     name: '',
-    type: 'startup', 
+    type: UserType.Startup, 
     email: '',
     phone: '',
     password: ''
   };
+  UserType = UserType;
   repassword: string = '';
 
   currentYear = new Date().getFullYear();
@@ -51,13 +52,14 @@ export class AuthComponent {
 
     this.authService.login(this.login).subscribe({
       next: (res) => {
-        if (res.userType === 'startup') {
-          this.router.navigate(['/startup/profile']);
-        } else if (res.userType === 'vc') {
-          this.router.navigate(['/startup/profile']);
-        } else {
-          this.router.navigate(['/startup/profile']);
-        }
+
+        const user = {
+          username: res.username,
+          userType: res.userType,
+          token: res.token || ''
+        };
+        this.router.navigate([`/dashboard/${user.username}`]);
+       
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
@@ -73,12 +75,9 @@ export class AuthComponent {
       return;
     } 
 
-    // Adjust endpoint based on userType
-    const endpoint = this.signup.type === 'startup' ? 'signup/startup' : 'signup/vc';
-
-    this.authService.signup(endpoint, this.signup).subscribe({
-      next: (res) => { 
-        this.router.navigate(['/']);  
+    this.authService.signup(this.signup).subscribe({
+      next: (res) => {  
+        this.switchTab('login');
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'Login failed';
