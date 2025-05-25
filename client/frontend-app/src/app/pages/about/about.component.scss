@@ -59,6 +59,10 @@
   }
 }
 
+.about-values p {
+  color: var(--white) !important;
+}
+
 .about-team {
   padding: 80px 0;
   background: var(--white);
@@ -77,6 +81,10 @@
     gap: 2rem;
     padding: 0 1rem;
   }
+}
+
+.about-team .bio {
+  color: var(--text-color) !important;
 }
 
 .about-cta {
@@ -146,5 +154,13 @@
         color: var(--primary-color);
       }
     }
+  }
+
+  .about-values .p{
+    color: var(--text-color) !important;
+  }
+
+  .about-team{
+    color: var(--text-color) !important;
   }
 } 
