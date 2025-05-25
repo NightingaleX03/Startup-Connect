@@ -7,11 +7,11 @@
       <!-- 1. Mental Well-being -->
       <div class="entry-section">
         <h2>🧠 Mental Well-being</h2>
-        <label>How often do you feel motivated to start your workday?</label>
+        <label class="required-label">How often do you feel motivated to start your workday?</label>
         <input type="range" min="1" max="5" [(ngModel)]="mentalMotivation" name="mentalMotivation" required>
         <div class="slider-labels"><span>Rarely</span><span>Always</span></div>
 
-        <label>How do you typically cope with stress?</label>
+        <label class="required-label">How do you typically cope with stress?</label>
         <select [(ngModel)]="mentalCoping" name="mentalCoping" required>
           <option value="">Select an option</option>
           <option value="Meditation">Meditation</option>
@@ -24,72 +24,72 @@
         <label>Describe a work scenario that recently made you feel overwhelmed.</label>
         <textarea [(ngModel)]="mentalScenario" name="mentalScenario"></textarea>
 
-        <label>How comfortable are you asking for help when struggling?</label>
+        <label class="required-label">How comfortable are you asking for help when struggling?</label>
         <input type="range" min="1" max="5" [(ngModel)]="mentalComfort" name="mentalComfort" required>
         <div class="slider-labels"><span>Uncomfortable</span><span>Very Comfortable</span></div>
       </div>
       <!-- 2. Physical Health & Lifestyle -->
       <div class="entry-section">
         <h2>💪 Physical Health & Lifestyle</h2>
-        <label>How frequently do you take breaks to stretch or walk?</label>
+        <label class="required-label">How frequently do you take breaks to stretch or walk?</label>
         <input type="range" min="1" max="5" [(ngModel)]="physicalBreaks" name="physicalBreaks" required>
         <div class="slider-labels"><span>Never</span><span>Regularly</span></div>
 
-        <label>Do you eat well-balanced meals most days?</label>
+        <label class="required-label">Do you eat well-balanced meals most days?</label>
         <input type="range" min="1" max="5" [(ngModel)]="physicalMeals" name="physicalMeals" required>
         <div class="slider-labels"><span>Not at all</span><span>Always</span></div>
 
         <label>What's the biggest obstacle preventing you from exercising more?</label>
         <textarea [(ngModel)]="physicalObstacle" name="physicalObstacle"></textarea>
 
-        <label>How many hours of sleep do you get on average?</label>
+        <label class="required-label">How many hours of sleep do you get on average?</label>
         <input type="range" min="1" max="5" [(ngModel)]="physicalSleep" name="physicalSleep" required>
         <div class="slider-labels"><span>Less than 4</span><span>More than 8</span></div>
       </div>
       <!-- 3. Workplace Culture & Connection -->
       <div class="entry-section">
         <h2>🤝 Workplace Culture & Connection</h2>
-        <label>How valued do you feel in your startup?</label>
+        <label class="required-label">How valued do you feel in your startup?</label>
         <input type="range" min="1" max="5" [(ngModel)]="cultureValue" name="cultureValue" required>
         <div class="slider-labels"><span>Not valued</span><span>Very valued</span></div>
 
-        <label>Do you have meaningful friendships with coworkers?</label>
+        <label class="required-label">Do you have meaningful friendships with coworkers?</label>
         <input type="range" min="1" max="5" [(ngModel)]="cultureFriendships" name="cultureFriendships" required>
         <div class="slider-labels"><span>None</span><span>Strong friendships</span></div>
 
         <label>What's one thing leadership could do to improve culture?</label>
         <textarea [(ngModel)]="cultureImprove" name="cultureImprove"></textarea>
 
-        <label>How openly do you share ideas or concerns with your team?</label>
+        <label class="required-label">How openly do you share ideas or concerns with your team?</label>
         <input type="range" min="1" max="5" [(ngModel)]="cultureOpenness" name="cultureOpenness" required>
         <div class="slider-labels"><span>Not at all</span><span>Very openly</span></div>
       </div>
       <!-- 4. Productivity & Work-Life Balance -->
       <div class="entry-section">
         <h2>⚡ Productivity & Work-Life Balance</h2>
-        <label>Do you often work beyond normal business hours?</label>
+        <label class="required-label">Do you often work beyond normal business hours?</label>
         <input type="range" min="1" max="5" [(ngModel)]="prodHours" name="prodHours" required>
         <div class="slider-labels"><span>Rarely</span><span>Frequently</span></div>
 
-        <label>How well do you manage distractions while working?</label>
+        <label class="required-label">How well do you manage distractions while working?</label>
         <input type="range" min="1" max="5" [(ngModel)]="prodDistractions" name="prodDistractions" required>
         <div class="slider-labels"><span>Poorly</span><span>Very well</span></div>
 
         <label>What's your strategy for maintaining work-life balance?</label>
         <textarea [(ngModel)]="prodStrategy" name="prodStrategy"></textarea>
 
-        <label>How effective is your startup at setting realistic deadlines?</label>
+        <label class="required-label">How effective is your startup at setting realistic deadlines?</label>
         <input type="range" min="1" max="5" [(ngModel)]="prodDeadlines" name="prodDeadlines" required>
         <div class="slider-labels"><span>Poorly</span><span>Extremely well</span></div>
       </div>
       <!-- 5. Financial Wellness & Stability -->
       <div class="entry-section">
         <h2>💰 Financial Wellness & Stability</h2>
-        <label>How stressed do you feel about finances?</label>
+        <label class="required-label">How stressed do you feel about finances?</label>
         <input type="range" min="1" max="5" [(ngModel)]="finStress" name="finStress" required>
         <div class="slider-labels"><span>Not at all</span><span>Extremely stressed</span></div>
 
-        <label>Do you have access to financial planning resources at work?</label>
+        <label class="required-label">Do you have access to financial planning resources at work?</label>
         <select [(ngModel)]="finResources" name="finResources" required>
           <option value="">Select an option</option>
           <option value="Yes">Yes</option>
@@ -99,25 +99,25 @@
         <label>If your startup offered better financial benefits, what would help you most?</label>
         <textarea [(ngModel)]="finBenefits" name="finBenefits"></textarea>
 
-        <label>How prepared are you for unexpected financial expenses?</label>
+        <label class="required-label">How prepared are you for unexpected financial expenses?</label>
         <input type="range" min="1" max="5" [(ngModel)]="finPrepared" name="finPrepared" required>
         <div class="slider-labels"><span>Unprepared</span><span>Very prepared</span></div>
       </div>
       <!-- 6. Personal Growth & Career Development -->
       <div class="entry-section">
         <h2>📈 Personal Growth & Career Development</h2>
-        <label>How satisfied are you with mentorship opportunities?</label>
+        <label class="required-label">How satisfied are you with mentorship opportunities?</label>
         <input type="range" min="1" max="5" [(ngModel)]="growthMentorship" name="growthMentorship" required>
         <div class="slider-labels"><span>Not satisfied</span><span>Very satisfied</span></div>
 
-        <label>Do you feel your startup invests in your skill development?</label>
+        <label class="required-label">Do you feel your startup invests in your skill development?</label>
         <input type="range" min="1" max="5" [(ngModel)]="growthInvestment" name="growthInvestment" required>
         <div class="slider-labels"><span>No investment</span><span>Strong investment</span></div>
 
         <label>What's one professional skill you're working to improve?</label>
         <textarea [(ngModel)]="growthSkill" name="growthSkill"></textarea>
 
-        <label>How confident are you about your career progression?</label>
+        <label class="required-label">How confident are you about your career progression?</label>
         <input type="range" min="1" max="5" [(ngModel)]="growthConfidence" name="growthConfidence" required>
         <div class="slider-labels"><span>Uncertain</span><span>Very confident</span></div>
       </div>
