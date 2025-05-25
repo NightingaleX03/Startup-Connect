@@ -11,30 +11,34 @@
         <div class="leaderboard custom-card">
           <app-leaderboard></app-leaderboard>
         </div>
-        <div class="update1 custom-card">Update</div>
+        <div class="update1 custom-card">
+          <app-notification-list></app-notification-list>
+        </div>
         <div class="news custom-card">
-          <div class="news-title-main">News</div>
-          <ng-container *ngIf="newsLoading">Loading news...</ng-container>
-          <ng-container *ngIf="newsError">{{ newsError }}</ng-container>
-          <ng-container *ngIf="!newsLoading && !newsError && newsArticles && newsArticles.length">
-            <div class="news-list">
-              <div class="news-item" *ngFor="let article of newsArticles">
-                <img class="news-img" [src]="article.urlToImage" alt="news image" *ngIf="article.urlToImage">
-                <div class="news-content">
-                  <div class="news-title"><a [href]="article.url" target="_blank">{{ article.title }}</a></div>
-                  <div class="news-desc">{{ article.description }}</div>
-                  <div class="news-meta">
-                    <span *ngIf="article.source?.name">Source: {{ article.source.name }}</span>
-                    <span *ngIf="article.publishedAt"> | {{ article.publishedAt | date:'medium' }}</span>
-                    <span> | <a [href]="article.url" target="_blank">Read more</a></span>
+          <div class="news-title-main">Latest News:</div>
+          <div class="news-scroll-area">
+            <ng-container *ngIf="newsLoading">Loading news...</ng-container>
+            <ng-container *ngIf="newsError">{{ newsError }}</ng-container>
+            <ng-container *ngIf="!newsLoading && !newsError && newsArticles && newsArticles.length">
+              <div class="news-list">
+                <div class="news-item" *ngFor="let article of newsArticles">
+                  <img class="news-img" [src]="article.urlToImage" alt="news image" *ngIf="article.urlToImage">
+                  <div class="news-content">
+                    <div class="news-title"><a [href]="article.url" target="_blank">{{ article.title }}</a></div>
+                    <div class="news-desc">{{ article.description }}</div>
+                    <div class="news-meta">
+                      <span *ngIf="article.publishedAt">{{ article.publishedAt | date:'medium' }}</span>
+                      <span *ngIf="article.source?.name"> | {{ article.source.name }}</span>
+                      <span> | <a [href]="article.url" target="_blank">Read more</a></span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!newsLoading && !newsError && (!newsArticles || !newsArticles.length)">
-            <div>No news found for your interests.</div>
-          </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!newsLoading && !newsError && (!newsArticles || !newsArticles.length)">
+              <div>No news found for your interests.</div>
+            </ng-container>
+          </div>
         </div>
         <div class="update2 custom-card">Linked-in Updates</div>
       </div>

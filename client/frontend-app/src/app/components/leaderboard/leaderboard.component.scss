@@ -63,6 +63,11 @@
   }
 }
 
+.leaderboard-item.highlighted {
+  background: var(--accent-color);
+  transform: translateX(5px);
+}
+
 .rank-badge {
   width: 44px;
   height: 44px;

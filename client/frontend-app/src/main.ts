@@ -2,7 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
-import { AuthGuard } from './app/pages/auth/auth.guard';
+// import { AuthGuard } from './app/pages/auth/auth.guard';
 
 const routes = [
   { path: '', loadComponent: () => import('./app/pages/home/home.component').then(m => m.HomeComponent) },
@@ -13,9 +13,13 @@ const routes = [
   { path: 'startup/mental-health', loadComponent: () => import('./app/pages/mental-health/mental-health.component').then(m => m.MentalHealthComponent) },
   { path: 'startup/social-hub', loadComponent: () => import('./app/pages/social-hub/social-hub.component').then(m => m.SocialHubComponent) },
   { 
+    path: 'dashboard', 
+    loadComponent: () => import('./app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
+  },
+  { 
     path: 'dashboard/:username', 
-    loadComponent: () => import('./app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    canActivate: [AuthGuard]
+    loadComponent: () => import('./app/pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
+    // canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' }
 ];
