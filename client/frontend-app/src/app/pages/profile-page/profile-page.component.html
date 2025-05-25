@@ -65,7 +65,7 @@
         <li>Financial Wellness & Stability:</li>
         <li>Personal Growth & Career Development:</li>
       </ul>
-      <a class="todays-entry-btn" routerLink="/wellness-entry">Today's Entry/Quiz</a>
+      <button type="button" class="todays-entry-btn" (click)="openEntryModal()">Today's Entry/Quiz</button>
       <div *ngIf="showTooltip" class="wellness-tooltip" [style.left.px]="tooltipX" [style.top.px]="tooltipY">
         {{ tooltipText }}
       </div>
@@ -81,4 +81,6 @@
       </ul>
     </div>
   </div>
-</section> 
+</section>
+
+<app-entry-modal [open]="entryModalOpen" (close)="closeEntryModal()"></app-entry-modal> 

@@ -14,6 +14,7 @@ import { SocialHubComponent } from './pages/social-hub/social-hub.component';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { EntryComponent } from './pages/entry/entry.component';
 /*import { AuthGuard } from './pages/auth/auth.guard';*/
 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'team', component: TeamComponent },
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'entry', component: EntryComponent },
   { path: 'social-hub', component: SocialHubComponent },
   { path: 'dashboard', component: DashboardComponent },
   /*{ path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard] },*/
