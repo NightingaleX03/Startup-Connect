@@ -23,14 +23,49 @@
     <!-- Wellness Score Section -->
     <div class="div3">
       <div class="wellness-header">Wellness Score</div>
-      <div class="github-activity-grid">
-        <!-- Placeholder for GitHub activity grid -->
-        <div class="activity-row" *ngFor="let row of [0,1,2,3,4,5,6]">
-          <span class="activity-cell" *ngFor="let col of [0,1,2,3,4,5,6,7,8,9,10,11,12,13]" [ngClass]="{'active': (row+col)%3===0}"></span>
+      <div class="calendar-nav">
+        <button class="calendar-arrow" (click)="prevMonth()">&#x25C0;</button>
+        <span class="calendar-month">{{ monthNames[month] }} {{ year }}</span>
+        <button class="calendar-arrow" (click)="nextMonth()">&#x25B6;</button>
+      </div>
+      <div class="calendar-scroll">
+        <div class="github-activity-grid">
+          <div class="activity-row" *ngFor="let week of calendar; let rowIdx = index">
+            <span class="day-heading-col">
+              <span *ngIf="isDayHeading(rowIdx)">{{ isDayHeading(rowIdx) }}</span>
+            </span>
+            <ng-container *ngFor="let day of week">
+              <span
+                *ngIf="day"
+                class="activity-cell"
+                [ngClass]="{'active': isEntry(day), 'today': isToday(day)}"
+                [style.background]="isEntry(day) ? 'var(--accent-color)' : ''"
+                (click)="onCellClick(day, $event)"
+                (mouseenter)="onCellMouseEnter(day)"
+                (mouseleave)="onCellMouseLeave()"
+                [attr.title]="!isEntry(day) && day ? 'no entry recorded' : null"
+              >
+                {{ day }}
+              </span>
+              <span *ngIf="!day" class="activity-cell-empty"></span>
+            </ng-container>
+          </div>
         </div>
       </div>
-      <div class="happiness-score">Happiness: <span>{{ happinessScore }}</span></div>
-      <a class="todays-entry-link" routerLink="/wellness-entry">Today's Entry/Quiz</a>
+      <hr class="wellness-separator" />
+      <div class="wellness-results-heading">Results</div>
+      <ul class="wellness-categories">
+        <li>Mental Well-Being:</li>
+        <li>Physical Health & Lifestyle:</li>
+        <li>Workplace Culture & Connection:</li>
+        <li>Productivity & Work-Life Balance:</li>
+        <li>Financial Wellness & Stability:</li>
+        <li>Personal Growth & Career Development:</li>
+      </ul>
+      <a class="todays-entry-btn" routerLink="/wellness-entry">Today's Entry/Quiz</a>
+      <div *ngIf="showTooltip" class="wellness-tooltip" [style.left.px]="tooltipX" [style.top.px]="tooltipY">
+        {{ tooltipText }}
+      </div>
     </div>
 
     <!-- Quick Links Section -->

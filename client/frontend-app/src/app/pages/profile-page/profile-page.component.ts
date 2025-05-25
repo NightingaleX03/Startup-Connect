@@ -16,13 +16,127 @@ export class ProfilePageComponent {
   pitchText = '';
   pitchPreview = '';
 
+  // --- Calendar grid logic ---
+  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  today = new Date();
+  month: number;
+  year: number;
+  firstOfMonth!: Date;
+  daysInMonth!: number;
+  firstDayOfWeek!: number;
+  numWeeks!: number;
+  calendar: (number | null)[][] = [];
+  monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  // Example: entries for some days (row, col) => true if entry exists
+  wellnessEntries: { [key: string]: boolean } = {
+    '2024-06-03': true, '2024-06-05': true, '2024-06-07': true, '2024-06-10': true, '2024-06-12': true
+  };
+  hoveredCell: { row: number, col: number } | null = null;
+  showTooltip = false;
+  tooltipText = '';
+  tooltipX = 0;
+  tooltipY = 0;
+
+  constructor() {
+    this.month = this.today.getMonth();
+    this.year = this.today.getFullYear();
+    this.buildCalendar();
+  }
+
+  buildCalendar() {
+    this.firstOfMonth = new Date(this.year, this.month, 1);
+    this.daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
+    this.firstDayOfWeek = (this.firstOfMonth.getDay() + 6) % 7; // 0=Monday, 6=Sunday
+    this.numWeeks = Math.ceil((this.daysInMonth + this.firstDayOfWeek) / 7);
+    this.calendar = [];
+    let day = 1 - this.firstDayOfWeek;
+    for (let week = 0; week < this.numWeeks; week++) {
+      const row: (number | null)[] = [];
+      for (let dow = 0; dow < 7; dow++) {
+        if (day > 0 && day <= this.daysInMonth) {
+          row.push(day);
+        } else {
+          row.push(null);
+        }
+        day++;
+      }
+      this.calendar.push(row);
+    }
+  }
+
+  prevMonth() {
+    if (this.month === 0) {
+      this.month = 11;
+      this.year--;
+    } else {
+      this.month--;
+    }
+    this.buildCalendar();
+  }
+
+  nextMonth() {
+    if (this.month === 11) {
+      this.month = 0;
+      this.year++;
+    } else {
+      this.month++;
+    }
+    this.buildCalendar();
+  }
+
+  getDateString(day: number | null): string {
+    if (!day) return '';
+    return `${this.year}-${(this.month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  }
+
+  isEntry(day: number | null): boolean {
+    if (!day) return false;
+    return !!this.wellnessEntries[this.getDateString(day)];
+  }
+
+  isToday(day: number | null): boolean {
+    if (!day) return false;
+    const d = new Date(this.year, this.month, day);
+    return d.toDateString() === this.today.toDateString();
+  }
+
+  onCellClick(day: number | null, event: MouseEvent) {
+    if (!this.isEntry(day)) {
+      this.tooltipText = 'no entry recorded';
+      this.showTooltip = true;
+      this.tooltipX = event.clientX;
+      this.tooltipY = event.clientY;
+      setTimeout(() => this.showTooltip = false, 1500);
+    }
+  }
+
+  onCellMouseEnter(day: number | null) {
+    this.hoveredCell = { row: 0, col: 0 }; // Not used, but could be extended
+  }
+  onCellMouseLeave() {
+    this.hoveredCell = null;
+  }
+
+  isDayHeading(row: number): string | null {
+    // Only show M/W/F as row headings
+    const weekDay = row % 7;
+    if (weekDay === 0) return 'M';
+    if (weekDay === 2) return 'W';
+    if (weekDay === 4) return 'F';
+    return null;
+  }
+
+  // --- Pitch deck logic ---
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        // For text-based files, just show the string
         if (file.type.includes('json') || file.type.includes('csv') || file.type.includes('text')) {
           this.pitchPreview = reader.result as string;
         } else if (file.type === 'application/pdf') {
@@ -34,7 +148,7 @@ export class ProfilePageComponent {
       if (file.type.includes('json') || file.type.includes('csv') || file.type.includes('text')) {
         reader.readAsText(file);
       } else if (file.type === 'application/pdf') {
-        reader.readAsArrayBuffer(file); // Just to trigger onload
+        reader.readAsArrayBuffer(file);
       } else {
         this.pitchPreview = 'Unsupported file type.';
       }
@@ -42,13 +156,11 @@ export class ProfilePageComponent {
   }
 
   sendPitch() {
-    // Use pitchText if not empty, otherwise use pitchPreview
     const pitchString = this.pitchText.trim() ? this.pitchText : this.pitchPreview;
     if (!pitchString) {
       alert('Please upload a file or enter your pitch.');
       return;
     }
-    // Here you would send pitchString to your backend or service
     alert('Pitch sent!\n' + pitchString.substring(0, 200) + (pitchString.length > 200 ? '...' : ''));
     this.pitchText = '';
     this.pitchPreview = '';
