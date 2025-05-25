@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 interface Startup {
   id: number;
@@ -18,10 +19,11 @@ interface Startup {
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   providers: [DecimalPipe]
 })
 export class LeaderboardComponent implements OnInit {
+  @Input() visibleItems: number = 10;
   startups$: Observable<Startup[]> | undefined;
   error: string | null = null;
 
@@ -32,7 +34,6 @@ export class LeaderboardComponent implements OnInit {
       map(data =>
         data
           .sort((a, b) => b.points - a.points)
-          .slice(0, 8)
           .map((startup, index) => ({
             ...startup,
             rank: index + 1

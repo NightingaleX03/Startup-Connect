@@ -1,5 +1,34 @@
 <div class="scaleup-title">Scale Up</div>
 <div class="scaleup-desc">Level up your startup journey by tracking your achievements and climbing the leaderboard. Complete challenges, earn points, and unlock new milestones!</div>
+<div class="scaleup-extra-section">
+  <div class="scaleup-extra-cards">
+    <div class="scaleup-stats-card">
+      <div class="scaleup-extra-title">Stats</div>
+      <div class="scaleup-stats-flex-row">
+        <div class="scaleup-pfp-large-col">
+          <img class="scaleup-pfp-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow" alt="Profile" />
+        </div>
+        <div class="scaleup-stats-info-col">
+          <div class="scaleup-stats-row">
+            <span>Current Points:</span> <span class="scaleup-stats-value">9850</span>
+          </div>
+          <div class="scaleup-stats-row">
+            <span>Leaderboard Position:</span> <span class="scaleup-stats-value">1st</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scaleup-daily-card">
+      <div class="scaleup-extra-title">Daily Achievements</div>
+      <ul class="scaleup-daily-list">
+        <li>Logged In: <button class="completed-btn" disabled>Completed</button></li>
+        <li>Visited Social Hub: <span class="scaleup-daily-points">+5 pts</span></li>
+        <li>Visited VC Firms: <span class="scaleup-daily-points">+5 pts</span></li>
+        <li>Visited Scale Up: <button class="completed-btn" disabled>Completed</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div *ngIf="approvalDialog.visible" class="approval-dialog-overlay">
   <div class="approval-dialog-box">
     <button class="approval-dialog-close" (click)="hideApprovalDialog()">&times;</button>
@@ -8,7 +37,7 @@
 </div>
 <div class="parent">
   <div class="div1">
-    <app-leaderboard></app-leaderboard>
+    <app-leaderboard [visibleItems]="28"></app-leaderboard>
   </div>
   <div class="div2" *ngIf="tiers[0]">
     <div class="ach-header">
