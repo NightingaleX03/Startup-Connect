@@ -92,7 +92,7 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 100vw;
   min-height: 70vh;
   gap: 0.3rem;
 }
@@ -132,6 +132,11 @@
 .div2 { grid-area: 3 / 1 / 5 / 4; }
 .div3 { grid-area: 1 / 4 / 3 / 5; }
 .div4 { grid-area: 3 / 4 / 5 / 5; }
+
+.div3 {
+  width: 100%;
+  max-width: none;
+}
 
 .wellness-header {
   font-size: 1.4rem;
@@ -429,6 +434,40 @@ textarea {
   align-self: center;
 }
 
+.wellness-categories-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.7rem 0 1.2rem 0;
+  justify-content: flex-start;
+}
+.wellness-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--accent-color);
+  color: #fff;
+  border-radius: 2rem;
+  padding: 0.15rem 0.6rem 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  min-width: 80px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  gap: 0.7rem;
+}
+.pill-category {
+  flex: 1;
+  text-align: left;
+  font-size: 0.74rem;
+  font-weight: 400;
+}
+.pill-score {
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-left: 0.4rem;
+  text-align: right;
+}
+
 @media (max-width: 900px) {
   .parent {
     grid-template-columns: 1fr 1fr;
@@ -454,5 +493,14 @@ textarea {
   }
   .wellness-header, .pitch-title, .quick-links-title {
     font-size: 1rem;
+  }
+  .wellness-categories-pills {
+    gap: 0.5rem;
+  }
+  .wellness-pill {
+    font-size: 0.98rem;
+    min-width: 120px;
+    padding: 0.4rem 0.8rem 0.4rem 0.7rem;
+    gap: 1.2rem;
   }
 } 

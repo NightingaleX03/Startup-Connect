@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "TechFlow",
+    "points": 9850,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow"
+  },
+  {
+    "id": 2,
+    "name": "InnovateX",
+    "points": 8750,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=InnovateX"
+  },
+  {
+    "id": 3,
+    "name": "FutureWave",
+    "points": 7650,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=FutureWave"
+  },
+  {
+    "id": 4,
+    "name": "SmartScale",
+    "points": 6540,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=SmartScale"
+  },
+  {
+    "id": 5,
+    "name": "DataPulse",
+    "points": 5430,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=DataPulse"
+  },
+  {
+    "id": 6,
+    "name": "CloudNine",
+    "points": 4320,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CloudNine"
+  },
+  {
+    "id": 7,
+    "name": "ByteBoost",
+    "points": 3210,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=ByteBoost"
+  },
+  {
+    "id": 8,
+    "name": "CodeCraft",
+    "points": 2100,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CodeCraft"
+  }
+] 

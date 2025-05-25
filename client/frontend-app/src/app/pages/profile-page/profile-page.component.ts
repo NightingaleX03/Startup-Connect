@@ -43,6 +43,22 @@ export class ProfilePageComponent {
   tooltipX = 0;
   tooltipY = 0;
 
+  wellnessCategories = [
+    { label: 'Mental Well-Being', key: 'mental' },
+    { label: 'Physical Health & Lifestyle', key: 'physical' },
+    { label: 'Workplace Culture & Connection', key: 'culture' },
+    { label: 'Productivity & Work-Life Balance', key: 'productivity' },
+    { label: 'Financial Wellness & Stability', key: 'financial' },
+    { label: 'Personal Growth & Career Development', key: 'growth' },
+  ];
+
+  // Example: scores for today (replace with real logic)
+  todayScores: { [key: string]: number } = {};
+
+  getCategoryScore(key: string): number | undefined {
+    return this.todayScores[key];
+  }
+
   constructor() {
     this.month = this.today.getMonth();
     this.year = this.today.getFullYear();

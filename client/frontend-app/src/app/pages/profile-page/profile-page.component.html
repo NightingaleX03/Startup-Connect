@@ -57,14 +57,12 @@
       </div>
       <hr class="wellness-separator" />
       <div class="wellness-results-heading">Results</div>
-      <ul class="wellness-categories">
-        <li>Mental Well-Being:</li>
-        <li>Physical Health & Lifestyle:</li>
-        <li>Workplace Culture & Connection:</li>
-        <li>Productivity & Work-Life Balance:</li>
-        <li>Financial Wellness & Stability:</li>
-        <li>Personal Growth & Career Development:</li>
-      </ul>
+      <div class="wellness-categories-pills">
+        <div class="wellness-pill" *ngFor="let cat of wellnessCategories">
+          <span class="pill-category">{{ cat.label }}</span>
+          <span class="pill-score">{{ getCategoryScore(cat.key) || 'NA' }}</span>
+        </div>
+      </div>
       <button type="button" class="todays-entry-btn" (click)="openEntryModal()">Today's Entry/Quiz</button>
       <div *ngIf="showTooltip" class="wellness-tooltip" [style.left.px]="tooltipX" [style.top.px]="tooltipY">
         {{ tooltipText }}
@@ -75,9 +73,9 @@
     <div class="div4">
       <div class="quick-links-title">Quick Links</div>
       <ul class="quick-links-list">
-        <li><a href="#">link1</a></li>
-        <li><a href="#">link2</a></li>
-        <li><a href="#">link3</a></li>
+        <li><a routerLink="/scale-up">Scale Up</a></li>
+        <li><a routerLink="/social-hub">Social Hub</a></li>
+        <li><a routerLink="/vc-firms">VC Firms</a></li>
       </ul>
     </div>
   </div>
