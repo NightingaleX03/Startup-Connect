@@ -92,10 +92,15 @@ export class LeaderboardComponent implements OnInit {
       }
     ];
 
-    return of(mockData.sort((a, b) => b.points - a.points).map((startup, index) => ({
-      ...startup,
-      rank: index + 1
-    })));
+    return of(
+      mockData
+        .sort((a, b) => b.points - a.points)
+        .slice(0, 8)
+        .map((startup, index) => ({
+          ...startup,
+          rank: index + 1
+        }))
+    );
   }
 
   getRankSuffix(rank: number): string {

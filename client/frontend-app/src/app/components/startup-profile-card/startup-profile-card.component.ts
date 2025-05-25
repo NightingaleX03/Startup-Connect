@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './startup-profile-card.component.html',
   styleUrls: ['./startup-profile-card.component.scss']
 })
-export class StartupProfileCardComponent {
+export class StartupProfileCardComponent implements OnInit {
+  @Output() tagsChange = new EventEmitter<string[]>();
+
   profile = {
     avatar: 'https://i.pinimg.com/originals/9d/4d/56/9d4d568a5c914fa0a82815cd2a503b90.jpg',
     name: 'Tech Startup Name',
@@ -22,6 +24,10 @@ export class StartupProfileCardComponent {
     linkedin: 'https://linkedin.com/company/techstartup',
     email: 'contact@techstartup.com'
   };
+
+  ngOnInit() {
+    this.tagsChange.emit(this.profile.tags);
+  }
 
   onIconClick(platform: string) {
     alert(`you clicked this icon (${platform})`);

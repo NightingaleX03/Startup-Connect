@@ -3,7 +3,7 @@
     <div class="dashboard-card">
       <div class="dashboard-grid">
         <div class="profile-shortcut custom-card">
-          <app-startup-profile-card></app-startup-profile-card>
+          <app-startup-profile-card (tagsChange)="onTagsChange($event)"></app-startup-profile-card>
         </div>
         <div class="local-groups custom-card">
           <app-local-groups></app-local-groups>
@@ -12,7 +12,30 @@
           <app-leaderboard></app-leaderboard>
         </div>
         <div class="update1 custom-card">Update</div>
-        <div class="news custom-card">News</div>
+        <div class="news custom-card">
+          <div class="news-title-main">News</div>
+          <ng-container *ngIf="newsLoading">Loading news...</ng-container>
+          <ng-container *ngIf="newsError">{{ newsError }}</ng-container>
+          <ng-container *ngIf="!newsLoading && !newsError && newsArticles && newsArticles.length">
+            <div class="news-list">
+              <div class="news-item" *ngFor="let article of newsArticles">
+                <img class="news-img" [src]="article.urlToImage" alt="news image" *ngIf="article.urlToImage">
+                <div class="news-content">
+                  <div class="news-title"><a [href]="article.url" target="_blank">{{ article.title }}</a></div>
+                  <div class="news-desc">{{ article.description }}</div>
+                  <div class="news-meta">
+                    <span *ngIf="article.source?.name">Source: {{ article.source.name }}</span>
+                    <span *ngIf="article.publishedAt"> | {{ article.publishedAt | date:'medium' }}</span>
+                    <span> | <a [href]="article.url" target="_blank">Read more</a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!newsLoading && !newsError && (!newsArticles || !newsArticles.length)">
+            <div>No news found for your interests.</div>
+          </ng-container>
+        </div>
         <div class="update2 custom-card">Linked-in Updates</div>
       </div>
     </div>
