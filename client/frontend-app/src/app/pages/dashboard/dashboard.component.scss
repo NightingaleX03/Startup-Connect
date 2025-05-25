@@ -33,16 +33,16 @@
     grid-template-areas:
       "profile profile local"
       "leader update1 news"
-      "leader update2 news";
-    gap: 0.5rem;
+      "leader linkedin linkedin";
+    gap: 0.3rem;
   }
 
   .profile-shortcut { grid-area: profile; }
   .local-groups { grid-area: local; }
-  .leaderboard { grid-area: leader; }
+  .leaderboard { grid-area: leader; grid-row: 2 / 4; }
   .update1 { grid-area: update1; }
-  .update2 { grid-area: update2; }
   .news { grid-area: news; }
+  .update2 { grid-area: linkedin; margin-top: -100px; }
 
   .custom-card {
     background: var(--background-color);
