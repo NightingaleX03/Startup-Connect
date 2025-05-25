@@ -134,19 +134,33 @@
 .div4 { grid-area: 3 / 4 / 5 / 5; }
 
 .wellness-header {
-  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--text-color);
+  text-align: center;
+  margin-bottom: 0.3rem;
   width: 100%;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.7rem;
+  align-self: center;
 }
 
-.pitch-title, .quick-links-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+.pitch-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 0.3rem;
+  width: 100%;
+  align-self: center;
+}
+
+.pitch-desc {
+  text-align: center;
+  color: var(--text-color);
+  font-size: 0.97rem;
+  font-weight: 400;
   margin-bottom: 0.7rem;
-  color: var(--primary-color);
+  opacity: 0.85;
+  font-style: italic;
 }
 
 .calendar-nav {
@@ -403,6 +417,16 @@ textarea {
   background: var(--primary-color);
   color: var(--white);
   transform: translateY(-2px);
+}
+
+.quick-links-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 0.3rem;
+  width: 100%;
+  align-self: center;
 }
 
 @media (max-width: 900px) {
