@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_login import login_user, logout_user
 from .models import User
 from database import db
+from flask import session
 
 users = Blueprint('user', __name__)
 
@@ -12,9 +13,13 @@ def login():
     username = data['name']
     password = data['password']
 
+    session['username'] = username
+    session.permanent = True
+
     user = User.query.filter_by(name=username).first()
 
     if user and user.password == password:
+        login_user(user)
         return jsonify({
             "message": "Login successful",
             "username": user.name,
@@ -26,6 +31,8 @@ def login():
 @users.route('/logout')
 def logout():
     logout_user()
+    session.pop('username', None)
+
     return redirect(url_for('login'))
 
 @users.route('/signup', methods=['POST'])
