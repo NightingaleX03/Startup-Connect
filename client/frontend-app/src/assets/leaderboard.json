@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "name": "TechFlow",
+    "points": 9850,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow"
+  },
+  {
+    "id": 2,
+    "name": "InnovateX",
+    "points": 8750,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=InnovateX"
+  },
+  {
+    "id": 3,
+    "name": "FutureWave",
+    "points": 7650,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=FutureWave"
+  },
+  {
+    "id": 4,
+    "name": "SmartScale",
+    "points": 6540,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=SmartScale"
+  },
+  {
+    "id": 5,
+    "name": "DataPulse",
+    "points": 5430,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=DataPulse"
+  },
+  {
+    "id": 6,
+    "name": "CloudNine",
+    "points": 4320,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CloudNine"
+  },
+  {
+    "id": 7,
+    "name": "ByteBoost",
+    "points": 3210,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=ByteBoost"
+  },
+  {
+    "id": 8,
+    "name": "CodeCraft",
+    "points": 2100,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CodeCraft"
+  },
+  {
+    "id": 9,
+    "name": "VentureNest",
+    "points": 2000,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=VentureNest"
+  },
+  {
+    "id": 10,
+    "name": "GrowthGrid",
+    "points": 1950,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=GrowthGrid"
+  },
+  {
+    "id": 11,
+    "name": "LaunchPad",
+    "points": 1900,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=LaunchPad"
+  },
+  {
+    "id": 12,
+    "name": "PivotPoint",
+    "points": 1850,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=PivotPoint"
+  },
+  {
+    "id": 13,
+    "name": "AlphaWorks",
+    "points": 1800,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=AlphaWorks"
+  },
+  {
+    "id": 14,
+    "name": "BetaBridge",
+    "points": 1750,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=BetaBridge"
+  },
+  {
+    "id": 15,
+    "name": "ScaleSphere",
+    "points": 1700,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=ScaleSphere"
+  },
+  {
+    "id": 16,
+    "name": "SparkLabs",
+    "points": 1650,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=SparkLabs"
+  },
+  {
+    "id": 17,
+    "name": "NextGen",
+    "points": 1600,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=NextGen"
+  },
+  {
+    "id": 18,
+    "name": "BrightMinds",
+    "points": 1550,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=BrightMinds"
+  },
+  {
+    "id": 19,
+    "name": "IdeaForge",
+    "points": 1500,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=IdeaForge"
+  },
+  {
+    "id": 20,
+    "name": "Visionary",
+    "points": 1450,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=Visionary"
+  },
+  {
+    "id": 21,
+    "name": "PulseTech",
+    "points": 1400,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=PulseTech"
+  },
+  {
+    "id": 22,
+    "name": "QuantumLeap",
+    "points": 1350,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=QuantumLeap"
+  },
+  {
+    "id": 23,
+    "name": "NovaCore",
+    "points": 1300,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=NovaCore"
+  },
+  {
+    "id": 24,
+    "name": "ElevateAI",
+    "points": 1250,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=ElevateAI"
+  },
+  {
+    "id": 25,
+    "name": "PeakLogic",
+    "points": 1200,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=PeakLogic"
+  },
+  {
+    "id": 26,
+    "name": "StriveTech",
+    "points": 1150,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=StriveTech"
+  },
+  {
+    "id": 27,
+    "name": "Momentum",
+    "points": 1100,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=Momentum"
+  },
+  {
+    "id": 28,
+    "name": "InnoPeak",
+    "points": 1050,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=InnoPeak"
+  },
+  {
+    "id": 29,
+    "name": "SkylineAI",
+    "points": 1000,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=SkylineAI"
+  },
+  {
+    "id": 30,
+    "name": "BlueOcean",
+    "points": 950,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=BlueOcean"
+  },
+  {
+    "id": 31,
+    "name": "CloudBridge",
+    "points": 900,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CloudBridge"
+  },
+  {
+    "id": 32,
+    "name": "GreenField",
+    "points": 850,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=GreenField"
+  },
+  {
+    "id": 33,
+    "name": "RedShift",
+    "points": 800,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=RedShift"
+  },
+  {
+    "id": 34,
+    "name": "UrbanTech",
+    "points": 750,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=UrbanTech"
+  },
+  {
+    "id": 35,
+    "name": "AetherWorks",
+    "points": 700,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=AetherWorks"
+  },
+  {
+    "id": 36,
+    "name": "BrightPath",
+    "points": 650,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=BrightPath"
+  },
+  {
+    "id": 37,
+    "name": "CoreVision",
+    "points": 600,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=CoreVision"
+  },
+  {
+    "id": 38,
+    "name": "DataNest",
+    "points": 550,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=DataNest"
+  },
+  {
+    "id": 39,
+    "name": "EchoTech",
+    "points": 500,
+    "profilePicture": "https://api.dicebear.com/7.x/avataaars/svg?seed=EchoTech"
+  }
+] 

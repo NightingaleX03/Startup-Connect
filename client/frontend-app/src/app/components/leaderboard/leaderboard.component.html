@@ -1,4 +1,4 @@
-<div class="leaderboard-container">
+<div class="leaderboard-container" [style.height.px]="visibleItems * 60 + (visibleItems - 1) * 12">
   <h2 class="leaderboard-title">Startup Leaderboard</h2>
   
   <!-- Error message -->
@@ -12,8 +12,9 @@
   </div>
   
   <!-- Leaderboard list -->
-  <div class="leaderboard-list" *ngIf="startups$ | async as startups">
-    <div class="leaderboard-item" *ngFor="let startup of startups">
+  <div class="leaderboard-list" [style.height.px]="visibleItems * 60 + (visibleItems - 1) * 12" *ngIf="startups$ | async as startups">
+    <div class="leaderboard-item" *ngFor="let startup of startups"
+         [ngClass]="{'top-three': startup.rank <= 3, 'highlighted': startup.rank === 1}">
       <div class="rank-badge" [ngClass]="{'top-three': startup.rank <= 3}">
         {{startup.rank}}{{getRankSuffix(startup.rank)}}
       </div>

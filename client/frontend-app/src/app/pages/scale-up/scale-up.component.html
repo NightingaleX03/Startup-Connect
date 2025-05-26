@@ -1,0 +1,154 @@
+<div class="scaleup-title">Scale Up</div>
+<div class="scaleup-desc">Level up your startup journey by tracking your achievements and climbing the leaderboard. Complete challenges, earn points, and unlock new milestones!</div>
+<div class="scaleup-extra-section">
+  <div class="scaleup-extra-cards">
+    <div class="scaleup-stats-card">
+      <div class="scaleup-extra-title">Stats</div>
+      <div class="scaleup-stats-flex-row">
+        <div class="scaleup-pfp-large-col">
+          <img class="scaleup-pfp-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow" alt="Profile" />
+        </div>
+        <div class="scaleup-stats-info-col">
+          <div class="scaleup-stats-row">
+            <span>Current Points:</span> <span class="scaleup-stats-value">9850</span>
+          </div>
+          <div class="scaleup-stats-row">
+            <span>Leaderboard Position:</span> <span class="scaleup-stats-value">1st</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scaleup-daily-card">
+      <div class="scaleup-extra-title">Daily Achievements</div>
+      <ul class="scaleup-daily-list">
+        <li>Logged In: <button class="completed-btn" disabled>Completed</button></li>
+        <li>Visited Social Hub: <span class="scaleup-daily-points">+5 pts</span></li>
+        <li>Visited VC Firms: <span class="scaleup-daily-points">+5 pts</span></li>
+        <li>Visited Scale Up: <button class="completed-btn" disabled>Completed</button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="approvalDialog.visible" class="approval-dialog-overlay">
+  <div class="approval-dialog-box">
+    <button class="approval-dialog-close" (click)="hideApprovalDialog()">&times;</button>
+    <div class="approval-dialog-message">{{ approvalDialog.message }}</div>
+  </div>
+</div>
+<div class="parent">
+  <div class="div1">
+    <app-leaderboard [visibleItems]="28"></app-leaderboard>
+  </div>
+  <div class="div2" *ngIf="tiers[0]">
+    <div class="ach-header">
+      <span>{{ tiers[0].name }} Achievements</span>
+      <span class="ach-progress">Progress: {{ progress[tiers[0].name].completed }}/{{ progress[tiers[0].name].total }}</span>
+    </div>
+    <div class="ach-desc">{{ tiers[0].description }}</div>
+    <div class="ach-slider" *ngIf="!showAllTiers[tiers[0].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[0].achievements | slice:0:10; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[0].name.toLowerCase() + '.png'" [alt]="tiers[0].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[0].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[0].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[0].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <div class="ach-grid" *ngIf="showAllTiers[tiers[0].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[0].achievements; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[0].name.toLowerCase() + '.png'" [alt]="tiers[0].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[0].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[0].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[0].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <button class="see-more-btn" (click)="toggleShowAll(tiers[0].name)">
+      {{ showAllTiers[tiers[0].name] ? 'See less' : 'See more' }}
+    </button>
+  </div>
+  <div class="div3" *ngIf="tiers[1]">
+    <div class="ach-header">
+      <span>{{ tiers[1].name }} Achievements</span>
+      <span class="ach-progress">Progress: {{ progress[tiers[1].name].completed }}/{{ progress[tiers[1].name].total }}</span>
+    </div>
+    <div class="ach-desc">{{ tiers[1].description }}</div>
+    <div class="ach-slider" *ngIf="!showAllTiers[tiers[1].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[1].achievements | slice:0:10; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[1].name.toLowerCase() + '.png'" [alt]="tiers[1].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[1].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[1].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[1].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <div class="ach-grid" *ngIf="showAllTiers[tiers[1].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[1].achievements; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[1].name.toLowerCase() + '.png'" [alt]="tiers[1].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[1].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[1].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[1].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <button class="see-more-btn" (click)="toggleShowAll(tiers[1].name)">
+      {{ showAllTiers[tiers[1].name] ? 'See less' : 'See more' }}
+    </button>
+  </div>
+  <div class="div4" *ngIf="tiers[2]">
+    <div class="ach-header">
+      <span>{{ tiers[2].name }} Achievements</span>
+      <span class="ach-progress">Progress: {{ progress[tiers[2].name].completed }}/{{ progress[tiers[2].name].total }}</span>
+    </div>
+    <div class="ach-desc">{{ tiers[2].description }}</div>
+    <div class="ach-slider" *ngIf="!showAllTiers[tiers[2].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[2].achievements | slice:0:10; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[2].name.toLowerCase() + '.png'" [alt]="tiers[2].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[2].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[2].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[2].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <div class="ach-grid" *ngIf="showAllTiers[tiers[2].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[2].achievements; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[2].name.toLowerCase() + '.png'" [alt]="tiers[2].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[2].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[2].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[2].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <button class="see-more-btn" (click)="toggleShowAll(tiers[2].name)">
+      {{ showAllTiers[tiers[2].name] ? 'See less' : 'See more' }}
+    </button>
+  </div>
+  <div class="div5" *ngIf="tiers[3]">
+    <div class="ach-header">
+      <span>{{ tiers[3].name }} Achievements</span>
+      <span class="ach-progress">Progress: {{ progress[tiers[3].name].completed }}/{{ progress[tiers[3].name].total }}</span>
+    </div>
+    <div class="ach-desc">{{ tiers[3].description }}</div>
+    <div class="ach-slider" *ngIf="!showAllTiers[tiers[3].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[3].achievements | slice:0:10; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[3].name.toLowerCase() + '.png'" [alt]="tiers[3].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[3].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[3].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[3].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <div class="ach-grid" *ngIf="showAllTiers[tiers[3].name]">
+      <div class="ach-card" *ngFor="let ach of tiers[3].achievements; let i = index">
+        <img class="ach-card-img" [src]="'assets/' + tiers[3].name.toLowerCase() + '.png'" [alt]="tiers[3].name + ' achievement'" />
+        <div class="ach-title">{{ ach.title }}</div>
+        <div class="ach-points">+{{ ach.points }} pts</div>
+        <button *ngIf="approvalStatus[getAchKey(tiers[3].name, i)] === 'none'" class="done-btn" (click)="approveAchievement(tiers[3].name, i)">Done</button>
+        <button *ngIf="approvalStatus[getAchKey(tiers[3].name, i)] === 'pending'" class="pending-btn" disabled>Pending</button>
+      </div>
+    </div>
+    <button class="see-more-btn" (click)="toggleShowAll(tiers[3].name)">
+      {{ showAllTiers[tiers[3].name] ? 'See less' : 'See more' }}
+    </button>
+  </div>
+</div> 

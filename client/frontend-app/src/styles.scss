@@ -3,10 +3,10 @@
 
 :root {
   --primary-color: #6b69d2;    
-  --secondary-color: #000000;
+  --secondary-color: #111111;
   --accent-color: #b153c6; 
   --text-color: #ffffff;
-  --background-color: #000000;
+  --background-color: #111111;
   --button-color: #b153c6;
   --button-hover: #473577;
 }
@@ -248,4 +248,23 @@ main {
 .value-icon {
   font-size: 3.5rem;
   margin-bottom: 1.5rem;
+}
+
+.home-page, .about-page {
+  --secondary-color: #000000 !important;
+  --background-color: #000000 !important;
+}
+
+// Override muted/grey text to be white in dark mode
+body, :root {
+  .text-muted,
+  .text-secondary,
+  .text-grey,
+  .text-gray,
+  .custom-muted,
+  .custom-grey,
+  .custom-gray {
+    color: var(--text-color) !important;
+    opacity: 1 !important;
+  }
 } 

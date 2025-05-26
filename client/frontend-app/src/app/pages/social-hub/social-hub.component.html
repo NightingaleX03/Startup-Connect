@@ -1,20 +1,199 @@
+<div class="simple-page-title">Social Hub</div>
+
 <section class="social-hub">
   <div class="container">
-    <div class="create-post-card">
-      <h2>Create a Post</h2>
-      <form>
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Title" />
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Post</button>
-      </form>
+    <!-- First Row: Profile + Post Creation -->
+    <div class="sh-row sh-row-top">
+      <div class="sh-profile-col">
+        <img class="sh-pfp-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=StartupUser" alt="Profile" />
+      </div>
+      <div class="sh-profile-info-col">
+        <div class="sh-profile-pill">Start Up Name</div>
+        <div class="sh-profile-pill sh-profile-location">Location</div>
+      </div>
+      <div class="sh-post-card">
+        <h2>Create a Post</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <input 
+              type="text" 
+              class="form-control" 
+              placeholder="Title" 
+              [(ngModel)]="newPost.title" 
+              name="title"
+              [class.is-invalid]="formErrors['title']" />
+            <div class="error-message" *ngIf="formErrors['title']">{{ formErrors['title'] }}</div>
+          </div>
+          <div class="form-group">
+            <label style="font-weight:600; color:var(--text-color); margin-bottom:0.5rem; display:block;">Tags</label>
+            <div class="sh-selected-tags" *ngIf="newPost.tags && newPost.tags.length">
+              <span class="sh-tag selected" *ngFor="let tag of newPost.tags" (click)="removeTag(tag)">
+                {{ tag }} <span style="margin-left:4px;cursor:pointer;">&times;</span>
+              </span>
+            </div>
+            <div class="sh-tags-dropdown-wrapper" [class.open]="tagsDropdownOpen">
+              <div class="sh-tags-dropdown-trigger" (click)="toggleTagsDropdown()">
+                <span *ngIf="!newPost.tags.length" style="color:var(--text-color);opacity:0.7;">Select tags...</span>
+                <span *ngIf="newPost.tags.length">{{ newPost.tags.length }} tag(s) selected</span>
+                <i class="fas fa-chevron-down" style="margin-left:8px;"></i>
+              </div>
+              <div class="sh-tags-dropdown-menu" *ngIf="tagsDropdownOpen">
+                <div class="sh-tag-option" *ngFor="let tag of filterTags" (click)="toggleTagSelection(tag); $event.stopPropagation();">
+                  <input type="checkbox" [checked]="newPost.tags.includes(tag)" />
+                  <span>{{ tag }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="error-message" *ngIf="formErrors['tags']">{{ formErrors['tags'] }}</div>
+          </div>
+          <div class="form-group">
+            <div class="sh-rich-text-toolbar">
+              <button type="button" class="sh-toolbar-btn" (click)="formatText('bold')" title="Bold">
+                <i class="fas fa-bold"></i>
+                <span>Bold</span>
+              </button>
+              <button type="button" class="sh-toolbar-btn" (click)="formatText('italic')" title="Italic">
+                <i class="fas fa-italic"></i>
+                <span>Italic</span>
+              </button>
+              <button type="button" class="sh-toolbar-btn" (click)="formatText('bullet')" title="Bullet List">
+                <i class="fas fa-list-ul"></i>
+                <span>Bullet List</span>
+              </button>
+              <button type="button" class="sh-toolbar-btn" (click)="formatText('number')" title="Numbered List">
+                <i class="fas fa-list-ol"></i>
+                <span>Numbered List</span>
+              </button>
+            </div>
+            <textarea 
+              class="form-control sh-rich-text" 
+              rows="7" 
+              placeholder="Write your post..." 
+              [(ngModel)]="newPost.description" 
+              name="description"
+              [class.is-invalid]="formErrors['description']"
+              (keydown)="onDescriptionKeydown($event)"></textarea>
+            <div class="error-message" *ngIf="formErrors['description']">{{ formErrors['description'] }}</div>
+          </div>
+          <button 
+            type="submit" 
+            class="btn btn-primary" 
+            [disabled]="isSubmitting">
+            {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="feed">
-      <div class="post-card">
-        <h3>Welcome to the Social Hub!</h3>
+
+    <!-- Second Row: Filter + Posts List -->
+    <div class="sh-row sh-row-bottom">
+      <div class="sh-filter-card">
+        <h3>Filter Discussions</h3>
+        <div class="sh-filter-section">
+          <input 
+            type="text" 
+            class="form-control sh-search" 
+            placeholder="Search discussions..." 
+            [(ngModel)]="searchQuery" 
+            (input)="onSearchChange(searchQuery)" />
+        </div>
+        <div class="sh-filter-section">
+          <div class="sh-filter-title">Topics</div>
+          <div class="sh-tags">
+            <span 
+              *ngFor="let tag of filterTags" 
+              class="sh-tag" 
+              [class.selected]="selectedTags.includes(tag)" 
+              (click)="toggleTag(tag)">
+              {{ tag }}
+            </span>
+          </div>
+        </div>
+        <div class="sh-filter-section">
+          <div class="sh-filter-title">Date</div>
+          <div class="sh-sort">
+            <button 
+              type="button" 
+              class="sh-sort-btn" 
+              [class.active]="sortOrder === 'newest'" 
+              (click)="setSortOrder('newest')">
+              Newest
+            </button>
+            <button 
+              type="button" 
+              class="sh-sort-btn" 
+              [class.active]="sortOrder === 'oldest'" 
+              (click)="setSortOrder('oldest')">
+              Oldest
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="sh-posts-list-card">
+        <div *ngFor="let post of filteredDiscussions" class="sh-post-list-item">
+          <div class="sh-post-list-pfp">
+            <img [src]="post.pfp" [alt]="post.title" />
+          </div>
+          <div class="sh-post-list-main">
+            <div class="sh-post-list-title">{{ post.title }}</div>
+            <div class="sh-post-list-date">{{ post.date | date:'medium' }}</div>
+            <div class="sh-post-list-tags">
+              <span *ngFor="let tag of post.tags" class="sh-tag">{{ tag }}</span>
+            </div>
+            <div class="sh-post-list-desc" [innerHTML]="post.description"></div>
+            <span *ngIf="isDescriptionTruncated(post.description)" class="sh-see-more-accent">Open to see more</span>
+          </div>
+          <div class="sh-post-list-action">
+            <button class="sh-open-discussion-btn" (click)="openDiscussion(post)">Open Discussion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Discussion Popup -->
+    <div *ngIf="showDiscussionPopup" class="sh-discussion-popup-overlay">
+      <div class="sh-discussion-popup">
+        <button class="sh-popup-close" (click)="closeDiscussion()">&times;</button>
+        <div *ngIf="activeDiscussion" class="sh-popup-content-row">
+          <div class="sh-popup-pfp-col">
+            <img class="sh-popup-pfp" [src]="activeDiscussion.pfp" [alt]="activeDiscussion.title" />
+          </div>
+          <div class="sh-popup-main-col">
+            <div class="sh-popup-title">{{ activeDiscussion.title }}</div>
+            <div class="sh-popup-date">{{ activeDiscussion.date | date:'medium' }}</div>
+            <div class="sh-popup-tags">
+              <span *ngFor="let tag of activeDiscussion.tags" class="sh-tag">{{ tag }}</span>
+            </div>
+            <div class="sh-popup-desc" [innerHTML]="formatRichText(activeDiscussion.description)"></div>
+            <div class="sh-popup-replies-section">
+              <div class="sh-popup-replies-list" *ngIf="activeDiscussion.replies && activeDiscussion.replies.length">
+                <div class="sh-popup-reply" *ngFor="let reply of activeDiscussion.replies">
+                  <img class="sh-popup-reply-pfp" [src]="reply.pfp" [alt]="reply.startupName" />
+                  <div class="sh-popup-reply-content">
+                    <div class="sh-popup-reply-header">
+                      <span class="sh-popup-reply-name">{{ reply.startupName }}</span>
+                      <span class="sh-popup-reply-date">{{ reply.date | date:'short' }}</span>
+                    </div>
+                    <div class="sh-popup-reply-text">{{ reply.text }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="sh-popup-reply-form">
+                <textarea class="form-control sh-popup-reply-input" [(ngModel)]="replyText" rows="2" placeholder="Write a reply..."></textarea>
+                <button class="btn btn-primary sh-popup-reply-btn" (click)="submitReply()">Reply</button>
+                <div class="error-message" *ngIf="replyError">{{ replyError }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div *ngIf="showSuccessPopup" class="sh-success-popup-overlay">
+      <div class="sh-success-popup">
+        <button class="sh-success-popup-close" (click)="closeSuccessPopup()">&times;</button>
+        <div class="sh-success-popup-message">Successfully submitted discussion</div>
       </div>
     </div>
   </div>
