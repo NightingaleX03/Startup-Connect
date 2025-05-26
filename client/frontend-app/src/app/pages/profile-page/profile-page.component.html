@@ -1,0 +1,84 @@
+<section class="profile-grid-wrapper">
+  <div class="parent">
+    <!-- Profile Section -->
+    <div class="div1">
+      <app-startup-profile-card></app-startup-profile-card>
+    </div>
+
+    <!-- Pitch Deck Section -->
+    <div class="div2">
+      <div class="pitch-title">Pitch Deck</div>
+      <div class="pitch-desc">
+        Leverage our advanced AI-driven platform to craft a compelling and professional pitch for your startup, ensuring you stand out to investors and partners.
+      </div>
+      <div class="pitch-upload">
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf,.json,.csv" />
+        <div class="or-divider">or</div>
+        <textarea [(ngModel)]="pitchText" placeholder="Type or paste your pitch here..."></textarea>
+        <button class="btn btn-primary" (click)="sendPitch()">Send</button>
+        <div class="pitch-preview" *ngIf="pitchPreview">
+          <strong>Preview:</strong>
+          <pre>{{ pitchPreview }}</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wellness Score Section -->
+    <div class="div3">
+      <div class="wellness-header">Wellness Score</div>
+      <div class="calendar-nav">
+        <button class="calendar-arrow" (click)="prevMonth()">&#x25C0;</button>
+        <span class="calendar-month">{{ monthNames[month] }} {{ year }}</span>
+        <button class="calendar-arrow" (click)="nextMonth()">&#x25B6;</button>
+      </div>
+      <div class="calendar-scroll">
+        <div class="github-activity-grid">
+          <div class="activity-row" *ngFor="let week of calendar; let rowIdx = index">
+            <span class="day-heading-col">
+              <span *ngIf="isDayHeading(rowIdx)">{{ isDayHeading(rowIdx) }}</span>
+            </span>
+            <ng-container *ngFor="let day of week">
+              <span
+                *ngIf="day"
+                class="activity-cell"
+                [ngClass]="{'active': isEntry(day), 'today': isToday(day)}"
+                [style.background]="isEntry(day) ? 'var(--accent-color)' : ''"
+                (click)="onCellClick(day, $event)"
+                (mouseenter)="onCellMouseEnter(day)"
+                (mouseleave)="onCellMouseLeave()"
+                [attr.title]="!isEntry(day) && day ? 'no entry recorded' : null"
+              >
+                {{ day }}
+              </span>
+              <span *ngIf="!day" class="activity-cell-empty"></span>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <hr class="wellness-separator" />
+      <div class="wellness-results-heading">Results</div>
+      <div class="wellness-categories-pills">
+        <div class="wellness-pill" *ngFor="let cat of wellnessCategories">
+          <span class="pill-category">{{ cat.label }}</span>
+          <span class="pill-score">{{ getCategoryScore(cat.key) || 'NA' }}</span>
+        </div>
+      </div>
+      <button type="button" class="todays-entry-btn" (click)="openEntryModal()">Today's Entry/Quiz</button>
+      <div *ngIf="showTooltip" class="wellness-tooltip" [style.left.px]="tooltipX" [style.top.px]="tooltipY">
+        {{ tooltipText }}
+      </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="div4">
+      <div class="quick-links-title">Quick Links</div>
+      <ul class="quick-links-list">
+        <li><a routerLink="/scale-up">Scale Up</a></li>
+        <li><a routerLink="/social-hub">Social Hub</a></li>
+        <li><a routerLink="/vc-firms">VC Firms</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<app-entry-modal [open]="entryModalOpen" (close)="closeEntryModal()"></app-entry-modal> 

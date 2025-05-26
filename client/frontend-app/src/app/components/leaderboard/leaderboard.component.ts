@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 interface Startup {
   id: number;
@@ -15,87 +19,27 @@ interface Startup {
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   providers: [DecimalPipe]
 })
 export class LeaderboardComponent implements OnInit {
-  startups$: Observable<Startup[]>;
+  @Input() visibleItems: number = 10;
+  startups$: Observable<Startup[]> | undefined;
   error: string | null = null;
 
-  constructor() {
-    this.startups$ = this.loadLeaderboardData();
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    console.log('Leaderboard component initialized');
-  }
-
-  loadLeaderboardData(): Observable<Startup[]> {
-    console.log('Loading mock leaderboard data...');
-    
-    const mockData: Startup[] = [
-      {
-        id: 1,
-        name: "TechFlow",
-        points: 9850,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow",
-        rank: 1
-      },
-      {
-        id: 2,
-        name: "InnovateX",
-        points: 8750,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=InnovateX",
-        rank: 2
-      },
-      {
-        id: 3,
-        name: "FutureWave",
-        points: 7650,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=FutureWave",
-        rank: 3
-      },
-      {
-        id: 4,
-        name: "SmartScale",
-        points: 6540,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=SmartScale",
-        rank: 4
-      },
-      {
-        id: 5,
-        name: "DataPulse",
-        points: 5430,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=DataPulse",
-        rank: 5
-      },
-      {
-        id: 6,
-        name: "CloudNine",
-        points: 4320,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=CloudNine",
-        rank: 6
-      },
-      {
-        id: 7,
-        name: "ByteBoost",
-        points: 3210,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=ByteBoost",
-        rank: 7
-      },
-      {
-        id: 8,
-        name: "CodeCraft",
-        points: 2100,
-        profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=CodeCraft",
-        rank: 8
-      }
-    ];
-
-    return of(mockData.sort((a, b) => b.points - a.points).map((startup, index) => ({
-      ...startup,
-      rank: index + 1
-    })));
+    this.startups$ = this.http.get<Startup[]>('assets/leaderboard.json').pipe(
+      map(data =>
+        data
+          .sort((a, b) => b.points - a.points)
+          .map((startup, index) => ({
+            ...startup,
+            rank: index + 1
+          }))
+      )
+    );
   }
 
   getRankSuffix(rank: number): string {

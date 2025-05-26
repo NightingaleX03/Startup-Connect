@@ -1,0 +1,11 @@
+<div class="notification-list-root">
+  <div class="notification-title">Notifications</div>
+  <div class="notification-list">
+    <div class="notification-item" *ngFor="let notification of notifications; let i = index">
+      <span class="notification-text">{{ notification.text }}</span>
+      <button class="notification-check" (click)="removeNotification(i)" title="Mark as read">
+        &#10003;
+      </button>
+    </div>
+  </div>
+</div> 
