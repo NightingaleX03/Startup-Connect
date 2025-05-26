@@ -25,6 +25,9 @@
       <!-- Startup Navbar -->
       <ul class="navbar-nav me-auto" *ngIf="authService.isLoggedIn() && authService.getUserType() === 'startup'">
         <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/dashboard/:username']" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/startup/profile']" routerLinkActive="active">Profile</a>
         </li>
         <li class="nav-item">
@@ -32,9 +35,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/startup/social-hub']" routerLinkActive="active">Social Hub</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/dashboard-temp']" routerLinkActive="active">Dashboard</a>
         </li>
       </ul>
 

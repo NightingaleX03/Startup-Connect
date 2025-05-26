@@ -1,6 +1,8 @@
 from flask import Flask
 from auth import users
+from profile import profile
 from flask_cors import CORS
+from flask_login import LoginManager
 from database import db
 from flask_session import Session
 import os
@@ -19,8 +21,11 @@ app.config["SESSION_TYPE"] = "filesystem"
 db.init_app(app)
 Session(app)
 CORS(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 app.register_blueprint(users, url_prefix='/auth')
+app.register_blueprint(profile, url_prefix='/profile')
 
 @app.route('/')
 def hello():

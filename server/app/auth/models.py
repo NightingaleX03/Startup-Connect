@@ -1,8 +1,9 @@
 from database import db
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin, db.Model):
 
     __tablename__ = "users"
 
@@ -18,7 +19,14 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     telephone = db.Column(db.String(15), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    
+
+    startup_profile = db.relationship(
+        "StartupProfile",
+        uselist=False,
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
     def __repr__(self):
         return f"Name : {self.name}"
     
