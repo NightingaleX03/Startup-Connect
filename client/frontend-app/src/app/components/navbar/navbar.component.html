@@ -17,27 +17,15 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/scale-up" routerLinkActive="active">Scale Up</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/social-hub" routerLinkActive="active">Social Hub</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/vc-firms" routerLinkActive="active">VC Firms</a>
-        </li>
       </ul>
 
       <!-- Startup Navbar -->
       <ul class="navbar-nav me-auto" *ngIf="authService.isLoggedIn() && authService.getUserType() === 'startup'">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/dashboard/:username']" routerLinkActive="active">Dashboard</a>
+          <a class="nav-link" [routerLink]="['/dashboard', user.username]" routerLinkActive="active">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/profile/:username']" routerLinkActive="active">Profile</a>
+          <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/startup/mental-health']" routerLinkActive="active">Mental Health</a>

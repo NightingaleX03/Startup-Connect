@@ -18,6 +18,8 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {}
 
+  user: { username: string } = { username: '' };
+
   ngOnInit(): void {
     // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
@@ -25,6 +27,12 @@ export class NavbarComponent implements OnInit {
       this.isDarkMode = savedTheme === 'dark';
       this.setTheme(this.isDarkMode);
     }
+
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+
   }
 
   toggleTheme() {

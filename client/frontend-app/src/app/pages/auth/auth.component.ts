@@ -52,13 +52,12 @@ export class AuthComponent {
 
     this.authService.login(this.login).subscribe({
       next: (res) => {
-
         const user = {
           username: res.username,
           userType: res.userType,
           token: res.token || ''
         };
-        this.router.navigate([`/dashboard/${user.username}`]);
+        this.router.navigate(['/dashboard', user.username]);
        
       },
       error: (err) => {
