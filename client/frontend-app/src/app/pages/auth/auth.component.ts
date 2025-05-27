@@ -52,7 +52,6 @@ export class AuthComponent {
 
     this.authService.login(this.login).subscribe({
       next: (res) => {
-
         const user = {
           username: res.username,
           userType: res.userType,

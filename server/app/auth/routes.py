@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, redirect, url_for
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, current_user
 from .models import User
 from database import db
 from flask import session
@@ -8,6 +8,8 @@ users = Blueprint('user', __name__)
 
 @users.route('/login', methods=['POST'])
 def login():
+    from app import bcrypt
+
     data = request.get_json()
 
     username = data['name']
@@ -18,7 +20,7 @@ def login():
 
     user = User.query.filter_by(name=username).first()
 
-    if user and user.password == password:
+    if user and bcrypt.check_password_hash(user.password, password):
         login_user(user)
         return jsonify({
             "message": "Login successful",
@@ -27,6 +29,14 @@ def login():
         }), 200
     else:
         return 'Invalid username or password', 401
+    
+@users.route('/me', methods=['GET'])
+@login_required
+def get_current_user():
+    return jsonify({
+        "username": current_user.name,
+        "userType": current_user.type
+    }), 200
 
 @users.route('/logout')
 def logout():
@@ -37,15 +47,18 @@ def logout():
 
 @users.route('/signup', methods=['POST'])
 def signup():
+    from app import bcrypt
+
     data = request.get_json()
 
     try:
+        hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
         new_user = User(
             name=data['name'],
             type=data['type'],
             email=data['email'],
             telephone=data['phone'],
-            password=data['password']
+            password=hashed_password
         )
 
         db.session.add(new_user)
