@@ -20,22 +20,25 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'team', component: TeamComponent },
+  { path: 'team', component: TeamComponent, canActivate: [AuthGuard] },
   { path: 'profile/:username', component: ProfilePageComponent, canActivate: [AuthGuard] },
   { path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'funding', component: FundingComponent },
+  { path: 'leaderboard', component: LeaderboardComponent, canActivate: [AuthGuard] },
+  { path: 'funding', component: FundingComponent, canActivate: [AuthGuard] },
   {
     path: 'scale-up',
-    loadComponent: () => import('./pages/scale-up/scale-up.component').then(m => m.ScaleUpComponent)
+    loadComponent: () => import('./pages/scale-up/scale-up.component').then(m => m.ScaleUpComponent),
+    canActivate: [AuthGuard]
   },
   {
     path: 'social-hub',
-    loadComponent: () => import('./pages/social-hub/social-hub.component').then(m => m.SocialHubComponent)
+    loadComponent: () => import('./pages/social-hub/social-hub.component').then(m => m.SocialHubComponent),
+    canActivate: [AuthGuard]
   },
   {
     path: 'vc-firms',
-    loadComponent: () => import('./pages/vc-firms/vc-firms.component').then(m => m.VcFirmsComponent)
+    loadComponent: () => import('./pages/vc-firms/vc-firms.component').then(m => m.VcFirmsComponent),
+    canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' }
 ];

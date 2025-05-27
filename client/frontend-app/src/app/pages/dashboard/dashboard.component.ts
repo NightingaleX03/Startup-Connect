@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
 import { LocalGroupsComponent } from '../../components/local-groups/local-groups.component';
 import { LeaderboardComponent } from '../../components/leaderboard/leaderboard.component';
@@ -21,11 +21,17 @@ export class DashboardComponent implements OnInit {
   newsError = '';
   username: string = '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  private route = inject(ActivatedRoute)
+
+  constructor(
+    private http: HttpClient, 
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.username = params.get('username') || '';
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
     });
   }
 

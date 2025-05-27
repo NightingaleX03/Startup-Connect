@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
 import { EntryModalComponent } from '../../components/entry-modal/entry-modal.component';
@@ -20,12 +20,16 @@ import { StartupProfileInformationComponent } from '../../components/startup-pro
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnInit{
   happinessScore = 7.5; // Placeholder value
   pitchText = '';
   pitchPreview = '';
   entryModalOpen = false;
   editProfileMode = false;
+
+  username: string = '';
+
+  private route = inject(ActivatedRoute)
 
   // --- Calendar grid logic ---
   daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -72,6 +76,12 @@ export class ProfilePageComponent {
     this.month = this.today.getMonth();
     this.year = this.today.getFullYear();
     this.buildCalendar();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
   }
 
   buildCalendar() {

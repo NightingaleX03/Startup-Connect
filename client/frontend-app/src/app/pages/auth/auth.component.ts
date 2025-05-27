@@ -57,7 +57,7 @@ export class AuthComponent {
           userType: res.userType,
           token: res.token || ''
         };
-        this.router.navigate([`/dashboard/${user.username}`]);
+        this.router.navigate(['/dashboard', user.username]);
        
       },
       error: (err) => {

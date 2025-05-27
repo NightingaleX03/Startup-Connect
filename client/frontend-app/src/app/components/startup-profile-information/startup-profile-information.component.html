@@ -2,14 +2,63 @@
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close-btn" (click)="onClose()">&times;</span>
 
-    <form >
+  <form #profileForm="ngForm" (ngSubmit)="submitProfile()">
     <div class="form-group">
-        <label for="startupName">Startup Name</label>
-        <input id="startupName" type="text" class="form-control" name="startupName" required />
+      <label for="avatar">Avatar URL</label>
+      <input type="text" class="form-control" id="avatar" [(ngModel)]="profile.avatar" name="avatar">
     </div>
-    
-    <button type="submit"></button>
-    </form>
+
+    <div class="form-group">
+      <label for="name">Startup Name</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="profile.name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="size">Size</label>
+      <input type="text" class="form-control" id="size" [(ngModel)]="profile.size" name="size">
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" [(ngModel)]="profile.location" name="location">
+    </div>
+
+    <div class="form-group">
+      <label for="founded_on">Founded On (YYYY-MM-DD)</label>
+      <input type="text" class="form-control" id="founded_on" [(ngModel)]="profile.founded_on" name="founded_on">
+    </div>
+
+    <div class="form-group">
+      <label for="founded_by">Founded By</label>
+      <input type="text" class="form-control" id="founded_by" [(ngModel)]="profile.founded_by" name="founded_by">
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags (seperate by a comma (,))</label>
+      <input type="text" class="form-control" id="tags" [(ngModel)]="profile.tags" name="tags">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" [(ngModel)]="profile.description" name="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="instagram">Instagram</label>
+      <input type="text" class="form-control" id="instagram" [(ngModel)]="profile.instagram" name="instagram">
+    </div>
+
+    <div class="form-group">
+      <label for="linkedin">LinkedIn</label>
+      <input type="text" class="form-control" id="linkedin" [(ngModel)]="profile.linkedin" name="linkedin">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage && errorMessage.length > 0">
+      {{ errorMessage }}
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
 
   </div>
 </div>
