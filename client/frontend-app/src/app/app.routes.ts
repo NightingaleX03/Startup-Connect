@@ -14,16 +14,15 @@ import { SocialHubComponent } from './pages/social-hub/social-hub.component';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-/*import { AuthGuard } from './pages/auth/auth.guard';*/
+import { AuthGuard } from './pages/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'about', component: AboutComponent },
   { path: 'team', component: TeamComponent },
-  { path: 'profile', component: ProfilePageComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  /*{ path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard] },*/
+  { path: 'profile/:username', component: ProfilePageComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard/:username', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'funding', component: FundingComponent },
   {

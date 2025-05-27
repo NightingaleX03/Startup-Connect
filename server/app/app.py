@@ -20,7 +20,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 db.init_app(app)
 Session(app)
-CORS(app)
+CORS(app, supports_credentials=True, origins=["http://localhost:4200"])
 login_manager = LoginManager()
 login_manager.init_app(app)
 
