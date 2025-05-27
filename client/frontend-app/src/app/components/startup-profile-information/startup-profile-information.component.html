@@ -1,0 +1,15 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close-btn" (click)="onClose()">&times;</span>
+
+    <form >
+    <div class="form-group">
+        <label for="startupName">Startup Name</label>
+        <input id="startupName" type="text" class="form-control" name="startupName" required />
+    </div>
+    
+    <button type="submit"></button>
+    </form>
+
+  </div>
+</div>

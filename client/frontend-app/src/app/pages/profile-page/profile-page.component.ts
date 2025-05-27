@@ -4,11 +4,19 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
 import { EntryModalComponent } from '../../components/entry-modal/entry-modal.component';
+import { StartupProfileInformationComponent } from '../../components/startup-profile-information/startup-profile-information.component';
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, StartupProfileCardComponent, EntryModalComponent],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    FormsModule, 
+    StartupProfileCardComponent, 
+    EntryModalComponent, 
+    StartupProfileInformationComponent,
+  ],
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
@@ -17,6 +25,7 @@ export class ProfilePageComponent {
   pitchText = '';
   pitchPreview = '';
   entryModalOpen = false;
+  editProfileMode = false;
 
   // --- Calendar grid logic ---
   daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -191,4 +200,13 @@ export class ProfilePageComponent {
   closeEntryModal() {
     this.entryModalOpen = false;
   }
+
+  editProfile() {
+    this.editProfileMode = true;
+  }
+
+  closeEditProfile() {
+    this.editProfileMode = false;
+  }
+
 } 
