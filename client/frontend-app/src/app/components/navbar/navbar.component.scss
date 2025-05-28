@@ -19,42 +19,89 @@
   right: 0;
   z-index: 1000;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--white) !important;
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    
+
     .brand-icon {
       font-size: 1.8rem;
     }
   }
-  
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
   .nav-item {
     margin: 0 0.25rem;
     
     .nav-link {
       color: var(--white) !important;
+      text-decoration: none;
       padding: 0.5rem 1rem;
       border-radius: 8px;
       transition: all 0.3s ease;
       font-weight: 500;
-      
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
         color: var(--white) !important;
       }
-      
+
       &.active {
         background-color: rgba(255, 255, 255, 0.1);
         color: var(--white) !important;
       }
+
+      &.theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: var(--secondary-color);
+        }
+      }
+
+      &.auth-btn {
+        background: var(--accent-color);
+        color: var(--white) !important;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        border-radius: 12px;
+        transition: all 0.2s;
+
+        &:hover {
+          background: var(--primary-color);
+          transform: translateY(-2px);
+        }
+      }
     }
   }
-  
+
   .navbar-auth {
     display: flex;
     gap: 1rem;
@@ -65,7 +112,7 @@
       border-radius: 8px;
       font-weight: 500;
       transition: all 0.3s ease;
-      
+
       &:hover {
         transform: translateY(-2px);
       }
@@ -90,6 +137,28 @@
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
         color: var(--white) !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding: 1rem 0;
+    }
+
+    .nav-item {
+      width: 100%;
+
+      .nav-link {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 0.75rem 1rem;
       }
     }
   }

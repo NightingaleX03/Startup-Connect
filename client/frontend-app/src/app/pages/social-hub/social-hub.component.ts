@@ -51,8 +51,10 @@ export class SocialHubComponent implements OnInit, OnDestroy {
 
   filterTags: string[] = [];
 
-  // Add a property for the startup name (should match the profile pill)
-  startupName: string = 'Start Up Name';
+  // Profile information
+  startupName: string = '';
+  startupLocation: string = '';
+  startupPfp: string = '';
 
   showSuccessPopup: boolean = false;
 
@@ -70,13 +72,22 @@ export class SocialHubComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.loadDiscussions();
-    document.addEventListener('click', this.handleOutsideClick);
+    // Get profile from auth service
+    const profile = this.authService.getProfile();
+    if (profile) {
+      this.startupName = profile.name || 'Start Up Name';
+      this.startupLocation = profile.location || 'Location';
+      this.startupPfp = profile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=StartupUser';
+    }
 
+    // Get username from route params
     this.route.params.subscribe(params => {
       this.username = params['username'];
     });
 
+    // Load discussions
+    this.loadDiscussions();
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   ngOnDestroy() {

@@ -1,5 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+
+interface VcPost {
+  logo: string;
+  title: string;
+  location: string;
+  tags: string[];
+  description: string;
+  portfolioSize: string;
+  investmentRange: string;
+  email?: string;
+  phone?: string;
+  linkedin?: string;
+}
 
 @Component({
   selector: 'app-vc-posts-list',
@@ -45,54 +59,88 @@ import { CommonModule } from '@angular/common';
   `,
   styleUrls: ['./vc-posts-list.component.scss']
 })
-export class VcPostsListComponent {
-  posts = [
-    {
-      logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-      title: 'Accel Partners',
-      location: 'Palo Alto, CA',
-      tags: ['Technology', 'Enterprise', 'SaaS'],
-      description: 'Global venture capital firm that partners with exceptional founders building category-defining companies.',
-      portfolioSize: '400+',
-      investmentRange: '$500K - $50M',
-    },
-    {
-      logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-      title: 'Sequoia Capital',
-      location: 'Menlo Park, CA',
-      tags: ['Technology', 'Healthcare', 'Consumer'],
-      description: 'One of the most successful venture capital firms, focusing on early-stage and growth-stage investments.',
-      portfolioSize: '300+',
-      investmentRange: '$100K - $100M',
-    },
-    {
-      logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-      title: 'Y Combinator',
-      location: 'Mountain View, CA',
-      tags: ['Startups', 'Accelerator', 'Early Stage'],
-      description: 'The most successful startup accelerator, helping founders build great companies.',
-      portfolioSize: '2000+',
-      investmentRange: '$125K - $500K',
-    }
-  ];
+export class VcPostsListComponent implements OnInit {
+  posts: VcPost[] = [];
   expanded = false;
   showModal = false;
-  selectedPost: any = null;
+  selectedPost: VcPost | null = null;
   applicants: string[] = [];
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    // Get stored posts from auth service
+    const storedPosts = this.authService.getVcPosts();
+    
+    if (storedPosts.length > 0) {
+      // Use stored posts if available
+      this.posts = storedPosts;
+    } else {
+      // Fallback to default posts if no stored posts
+      const authProfile = this.authService.getProfile();
+      if (authProfile) {
+        this.posts = [
+          {
+            logo: authProfile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=VC',
+            title: `${authProfile.name} - Early Stage`,
+            location: authProfile.location || 'Set your location',
+            tags: ['Early Stage', 'Seed', 'Pre-Seed'],
+            description: `${authProfile.description || 'Add a description of your VC firm'} - Early Stage Fund`,
+            portfolioSize: authProfile.portfolio_size || 'Add portfolio size',
+            investmentRange: '$100K - $1M',
+          },
+          {
+            logo: authProfile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=VC',
+            title: `${authProfile.name} - Growth Stage`,
+            location: authProfile.location || 'Set your location',
+            tags: ['Growth', 'Series A', 'Series B'],
+            description: `${authProfile.description || 'Add a description of your VC firm'} - Growth Stage Fund`,
+            portfolioSize: authProfile.portfolio_size || 'Add portfolio size',
+            investmentRange: '$1M - $10M',
+          },
+          {
+            logo: authProfile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=VC',
+            title: `${authProfile.name} - Specialized Fund`,
+            location: authProfile.location || 'Set your location',
+            tags: authProfile.focus_areas || ['Add focus areas'],
+            description: `${authProfile.description || 'Add a description of your VC firm'} - Specialized Investment Fund`,
+            portfolioSize: authProfile.portfolio_size || 'Add portfolio size',
+            investmentRange: authProfile.investment_range || 'Add investment range',
+          }
+        ];
+      }
+    }
+  }
 
   get visiblePosts() {
     return this.expanded ? this.posts : this.posts.slice(0, 3);
   }
 
-  openApplicants(post: any) {
+  openApplicants(post: VcPost) {
     this.selectedPost = post;
-    // Mock applicants list
-    this.applicants = [
-      'Startup Alpha',
-      'Beta Innovations',
-      'Gamma Tech',
-      'Delta Startups'
-    ];
+    // Generate different applicants based on the post type
+    if (post.title.includes('Early Stage')) {
+      this.applicants = [
+        'SeedStart',
+        'PreSeed Ventures',
+        'EarlyBird Tech',
+        'FirstRound Founders'
+      ];
+    } else if (post.title.includes('Growth Stage')) {
+      this.applicants = [
+        'GrowthTech',
+        'ScaleUp Solutions',
+        'SeriesA Ventures',
+        'Expansion Labs'
+      ];
+    } else {
+      this.applicants = [
+        'Specialized Startup',
+        'Niche Innovators',
+        'Domain Experts',
+        'Industry Leaders'
+      ];
+    }
     this.showModal = true;
   }
 

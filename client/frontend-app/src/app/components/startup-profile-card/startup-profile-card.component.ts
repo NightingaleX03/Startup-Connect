@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StartupProfileService } from '../startup-profile-information/startup-profile-information.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-startup-profile-card',
@@ -28,52 +29,53 @@ export class StartupProfileCardComponent implements OnInit {
 
   profile = { ...this.default_profile };
 
-  constructor(private profileService: StartupProfileService) {
-
-  }
-  
-  private isEmpty(value: any): boolean {
-    return value === undefined || value === null || value === '';
-  }
+  constructor(
+    private profileService: StartupProfileService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.tagsChange.emit(this.profile.tags);
 
-    const currentUserStr = localStorage.getItem('currentUser');
-    if (!currentUserStr) {
-      console.error('No logged-in user found in localStorage');
-      return;
+    // Get profile from auth service
+    const authProfile = this.authService.getProfile();
+    if (authProfile) {
+      this.profile = {
+        avatar: authProfile.avatar || this.default_profile.avatar,
+        name: authProfile.name || this.default_profile.name,
+        size: authProfile.size || this.default_profile.size,
+        location: authProfile.location || this.default_profile.location,
+        foundedOn: authProfile.founded_on || this.default_profile.foundedOn,
+        foundedBy: authProfile.founded_by || this.default_profile.foundedBy,
+        tags: authProfile.tags || this.default_profile.tags,
+        description: authProfile.description || this.default_profile.description,
+        instagram: authProfile.instagram || this.default_profile.instagram,
+        linkedin: authProfile.linkedin || this.default_profile.linkedin,
+        email: authProfile.email || this.default_profile.email,
+      };
+      this.tagsChange.emit(this.profile.tags);
     }
-    const currentUser = JSON.parse(currentUserStr);
+  }
 
-    this.profileService.getStartupProfile().subscribe({
-      next: (response: any) => {
-        if (response && response.profile) {
-          const backendProfile = response.profile;
+  onIconClick(type: string) {
+    let url = '';
+    switch (type) {
+      case 'instagram':
+        url = `https://instagram.com/${this.profile.instagram}`;
+        break;
+      case 'linkedin':
+        url = `https://linkedin.com/company/${this.profile.linkedin}`;
+        break;
+      case 'email':
+        url = `mailto:${this.profile.email}`;
+        break;
+    }
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
 
-          this.profile = {
-            ...this.profile,
-            avatar: !this.isEmpty(backendProfile.avatar) ? backendProfile.avatar : this.default_profile.avatar,
-            name: !this.isEmpty(backendProfile.name) ? backendProfile.name : this.default_profile.name,
-            size: !this.isEmpty(backendProfile.size) ? backendProfile.size : this.default_profile.size,
-            location: !this.isEmpty(backendProfile.location) ? backendProfile.location : this.default_profile.location,
-            foundedOn: !this.isEmpty(backendProfile.founded_on) ? backendProfile.founded_on : this.default_profile.foundedOn,
-            foundedBy: !this.isEmpty(backendProfile.founded_by) ? backendProfile.founded_by : this.default_profile.foundedBy,
-            tags: (backendProfile.tags && backendProfile.tags.length > 0) ? backendProfile.tags : this.default_profile.tags,
-            description: !this.isEmpty(backendProfile.description) ? backendProfile.description : this.default_profile.description,
-            instagram: !this.isEmpty(backendProfile.instagram) ? backendProfile.instagram : this.default_profile.instagram,
-            linkedin: !this.isEmpty(backendProfile.linkedin) ? backendProfile.linkedin : this.default_profile.linkedin,
-            email: !this.isEmpty(backendProfile.email) ? backendProfile.email : this.default_profile.email,
-          };
-
-          this.tagsChange.emit(this.profile.tags);
-        }
-      },
-      error: (error: any) => {
-        console.log('No profile found, using default.');
-      }
-    });
-  }  onIconClick(platform: string) {
-    alert(`you clicked this icon (${platform})`);
+  isEmpty(value: any): boolean {
+    return value === null || value === undefined || value === '';
   }
 } 

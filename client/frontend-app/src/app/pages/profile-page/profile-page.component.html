@@ -2,7 +2,8 @@
   <div class="parent">
     <!-- Profile Section -->
     <div class="div1">
-      <app-startup-profile-card></app-startup-profile-card>
+      <app-startup-profile-card *ngIf="userType === 'startup'"></app-startup-profile-card>
+      <app-vc-profile-card *ngIf="userType === 'vc'"></app-vc-profile-card>
       <button class="btn btn-primary" (click)="editProfile()">Edit Profile</button>
       <app-startup-profile-information *ngIf="editProfileMode" (close)="closeEditProfile()"></app-startup-profile-information>
     </div>
@@ -77,12 +78,12 @@
     </div>
 
     <!-- Quick Links Section -->
-    <div class="div4">
+    <div class="div4" *ngIf="userType === 'startup'">
       <div class="quick-links-title">Quick Links</div>
       <ul class="quick-links-list">
         <li><a routerLink="/scale-up">Scale Up</a></li>
         <li><a routerLink="/social-hub">Social Hub</a></li>
-        <li *ngIf="userType === 'startup'"><a routerLink="/vc-firms">VC Firms</a></li>
+        <li><a routerLink="/vc-firms">VC Firms</a></li>
       </ul>
     </div>
   </div>

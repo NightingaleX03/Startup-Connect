@@ -17,12 +17,6 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/vc-firms" routerLinkActive="active">VC Firms</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/vc-dashboard" routerLinkActive="active">VC Dashboard</a>
-        </li>
       </ul>
 
       <!-- Startup Navbar -->
@@ -34,7 +28,7 @@
           <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/startup/mental-health', user.username]" routerLinkActive="active">Mental Health</a>
+          <a class="nav-link" routerLink="/scale-up" routerLinkActive="active">Scaleup Hub</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/startup/social-hub', user.username]" routerLinkActive="active">Social Hub</a>
@@ -42,19 +36,38 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/vc-firms" routerLinkActive="active">VC Firms</a>
         </li>
+      </ul>
+
+      <!-- VC Navbar -->
+      <ul class="navbar-nav me-auto" *ngIf="authService.isLoggedIn() && authService.getUserType() === 'vc'">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/vc-dashboard" routerLinkActive="active">VC Dashboard</a>
+          <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/vc-dashboard', user.username]" routerLinkActive="active">Postings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/social-hub', user.username]" routerLinkActive="active">Social Hub</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vc-firms" routerLinkActive="active">VC Firms</a>
         </li>
       </ul>
 
-      <!-- Auth Buttons -->
-      <div class="navbar-auth">
-        <div class="theme-toggle" (click)="toggleTheme()" title="Change theme">
-          <span class="gear-emoji">⚙️</span>
-        </div>
-        <button class="btn btn-signup" *ngIf="!authService.isLoggedIn()" routerLink="/auth">Sign Up / Sign In</button>
-        <button class="btn btn-logout" *ngIf="authService.isLoggedIn()" (click)="logout()">Logout</button>
-      </div>
+      <!-- Right side nav items -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <button class="nav-link theme-toggle" (click)="toggleTheme()">
+            {{ isDarkMode ? '☀️' : '🌙' }}
+          </button>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <button class="nav-link" (click)="logout()">Logout</button>
+        </li>
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a class="nav-link auth-btn" routerLink="/auth">Sign Up / Sign In</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

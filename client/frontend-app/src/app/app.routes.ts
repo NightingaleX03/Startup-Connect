@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TeamComponent } from './pages/team/team.component';
-// import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { FundingComponent } from './pages/funding/funding.component';
@@ -29,7 +28,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'startup/social-hub/:username',
+    path: 'social-hub/:username',
     component: SocialHubComponent,
     canActivate: [AuthGuard]
   },
@@ -38,8 +37,9 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/vc-firms/vc-firms.component').then(m => m.VcFirmsComponent)
   },
   {
-    path: 'vc-dashboard',
-    loadComponent: () => import('./pages/vc-dashboard/vc-dashboard.component').then(m => m.VcDashboardComponent)
+    path: 'vc-dashboard/:username',
+    loadComponent: () => import('./pages/vc-dashboard/vc-dashboard.component').then(m => m.VcDashboardComponent),
+    canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' }
 ];

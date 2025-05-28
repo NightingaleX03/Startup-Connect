@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 interface VCFirm {
   name: string;
@@ -11,6 +12,9 @@ interface VCFirm {
   portfolioSize: string;
   investmentRange: string;
   dateAdded: Date;
+  email?: string;
+  phone?: string;
+  linkedin?: string;
 }
 
 @Component({
@@ -26,72 +30,58 @@ export class VcFirmsComponent implements OnInit {
   firms: VCFirm[] = [];
   filteredFirms: VCFirm[] = [];
   selectedTags: string[] = [];
+  showContactModal = false;
+  selectedFirm: VCFirm | null = null;
   availableTags: string[] = [
-    'Technology',
-    'Healthcare',
-    'Consumer',
-    'Software',
-    'Fintech',
-    'Crypto',
-    'Startups',
-    'Accelerator',
-    'Early Stage'
+    'AI/ML',
+    'FinTech',
+    'HealthTech',
+    'CleanTech',
+    'EdTech',
+    'Enterprise SaaS',
+    'Renewable Energy',
+    'Sustainability',
+    'Biotech',
+    'Digital Health',
+    'Blockchain',
+    'Payments',
+    'Deep Tech',
+    'Robotics',
+    'Quantum Computing',
+    'Consumer Tech',
+    'E-commerce',
+    'D2C'
   ];
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
-    // Sample data - replace with actual API call
-    this.firms = [
-      {
-        name: 'Sequoia Capital',
-        logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-        location: 'Menlo Park, CA',
-        tags: ['Technology', 'Healthcare', 'Consumer'],
-        description: 'One of the most successful venture capital firms, focusing on early-stage and growth-stage investments.',
-        portfolioSize: '300+',
-        investmentRange: '$100K - $100M',
-        dateAdded: new Date('2024-01-15')
-      },
-      {
-        name: 'Andreessen Horowitz',
-        logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-        location: 'Menlo Park, CA',
-        tags: ['Software', 'Fintech', 'Crypto'],
-        description: 'Known for backing bold entrepreneurs who move fast and break things.',
-        portfolioSize: '250+',
-        investmentRange: '$50K - $50M',
-        dateAdded: new Date('2024-02-01')
-      },
-      {
-        name: 'Y Combinator',
-        logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-        location: 'Mountain View, CA',
-        tags: ['Startups', 'Accelerator', 'Early Stage'],
-        description: 'The most successful startup accelerator, helping founders build great companies.',
-        portfolioSize: '2000+',
-        investmentRange: '$125K - $500K',
-        dateAdded: new Date('2024-03-01')
-      },
-      {
-        name: 'Accel Partners',
-        logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-        location: 'Palo Alto, CA',
-        tags: ['Technology', 'Enterprise', 'SaaS'],
-        description: 'Global venture capital firm that partners with exceptional founders building category-defining companies.',
-        portfolioSize: '400+',
-        investmentRange: '$500K - $50M',
-        dateAdded: new Date('2024-01-20')
-      },
-      {
-        name: 'Kleiner Perkins',
-        logo: 'https://angular.io/assets/images/logos/angular/angular.svg',
-        location: 'Menlo Park, CA',
-        tags: ['Healthcare', 'Enterprise', 'Consumer'],
-        description: 'Venture capital firm investing in early-stage, growth, and incubation companies.',
-        portfolioSize: '350+',
-        investmentRange: '$1M - $100M',
-        dateAdded: new Date('2024-02-15')
-      }
-    ];
+    // Get posts from auth service
+    const storedPosts = this.authService.getVcPosts();
+    
+    // Convert posts to firms format
+    this.firms = storedPosts.map(post => ({
+      name: post.title,
+      logo: post.logo,
+      location: post.location,
+      tags: post.tags,
+      description: post.description,
+      portfolioSize: post.portfolioSize,
+      investmentRange: post.investmentRange,
+      dateAdded: new Date(post.dateAdded), // Convert string date to Date object
+      email: post.email,
+      phone: post.phone,
+      linkedin: post.linkedin
+    }));
+
+    // Initialize filtered firms with all firms
+    this.filteredFirms = [...this.firms];
+    
+    // Apply initial sorting
+    this.applyFilters();
+  }
+
+  onSearch() {
     this.applyFilters();
   }
 
@@ -110,35 +100,45 @@ export class VcFirmsComponent implements OnInit {
     this.applyFilters();
   }
 
-  onSearch() {
-    this.applyFilters();
-  }
-
-  private applyFilters() {
+  applyFilters() {
     let filtered = [...this.firms];
 
-    // Apply search filter - only search through firm names
+    // Apply search filter
     if (this.searchQuery) {
       const query = this.searchQuery.toLowerCase();
       filtered = filtered.filter(firm => 
-        firm.name.toLowerCase().includes(query)
+        firm.name.toLowerCase().includes(query) ||
+        firm.location.toLowerCase().includes(query) ||
+        firm.tags.some(tag => tag.toLowerCase().includes(query))
       );
     }
 
     // Apply tag filters
     if (this.selectedTags.length > 0) {
-      filtered = filtered.filter(firm => 
+      filtered = filtered.filter(firm =>
         this.selectedTags.some(tag => firm.tags.includes(tag))
       );
     }
 
     // Apply sorting
     filtered.sort((a, b) => {
-      const dateA = a.dateAdded.getTime();
-      const dateB = b.dateAdded.getTime();
-      return this.sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+      if (this.sortOrder === 'newest') {
+        return b.dateAdded.getTime() - a.dateAdded.getTime();
+      } else {
+        return a.dateAdded.getTime() - b.dateAdded.getTime();
+      }
     });
 
     this.filteredFirms = filtered;
+  }
+
+  openContactModal(firm: VCFirm) {
+    this.selectedFirm = firm;
+    this.showContactModal = true;
+  }
+
+  closeContactModal() {
+    this.showContactModal = false;
+    this.selectedFirm = null;
   }
 } 

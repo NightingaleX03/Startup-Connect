@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
+import { VcProfileCardComponent } from '../../components/vc-profile-card/vc-profile-card.component';
 import { EntryModalComponent } from '../../components/entry-modal/entry-modal.component';
 import { StartupProfileInformationComponent } from '../../components/startup-profile-information/startup-profile-information.component';
 import { StartupProfileService } from '../../components/startup-profile-information/startup-profile-information.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -14,14 +16,15 @@ import { StartupProfileService } from '../../components/startup-profile-informat
     CommonModule, 
     RouterModule, 
     FormsModule, 
-    StartupProfileCardComponent, 
+    StartupProfileCardComponent,
+    VcProfileCardComponent,
     EntryModalComponent, 
     StartupProfileInformationComponent,
   ],
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnInit{
+export class ProfilePageComponent implements OnInit {
   happinessScore = 7.5; // Placeholder value
   pitchText = '';
   pitchPreview = '';
@@ -30,7 +33,7 @@ export class ProfilePageComponent implements OnInit{
   editProfileMode = false;
 
   username: string = '';
-  userType: string = localStorage.getItem('userType') || 'startup'; 
+  userType: string = '';
 
   // --- Calendar grid logic ---
   daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -76,6 +79,7 @@ export class ProfilePageComponent implements OnInit{
   constructor(
     private startupProfileService: StartupProfileService,
     private route: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.month = this.today.getMonth();
     this.year = this.today.getFullYear();
@@ -86,6 +90,7 @@ export class ProfilePageComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.username = params['username'];
     });
+    this.userType = this.authService.getUserType() || 'startup';
   }
 
   buildCalendar() {

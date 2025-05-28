@@ -6,14 +6,14 @@
       <div class="scaleup-extra-title">Stats</div>
       <div class="scaleup-stats-flex-row">
         <div class="scaleup-pfp-large-col">
-          <img class="scaleup-pfp-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=TechFlow" alt="Profile" />
+          <img class="scaleup-pfp-large" [src]="profilePicture" alt="Profile" />
         </div>
         <div class="scaleup-stats-info-col">
           <div class="scaleup-stats-row">
-            <span>Current Points:</span> <span class="scaleup-stats-value">9850</span>
+            <span>Current Points:</span> <span class="scaleup-stats-value">{{currentPoints}}</span>
           </div>
           <div class="scaleup-stats-row">
-            <span>Leaderboard Position:</span> <span class="scaleup-stats-value">1st</span>
+            <span>Leaderboard Position:</span> <span class="scaleup-stats-value">{{leaderboardPosition}}th</span>
           </div>
         </div>
       </div>

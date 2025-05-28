@@ -5,11 +5,11 @@
     <!-- First Row: Profile + Post Creation -->
     <div class="sh-row sh-row-top">
       <div class="sh-profile-col">
-        <img class="sh-pfp-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=StartupUser" alt="Profile" />
+        <img class="sh-pfp-large" [src]="startupPfp" alt="Profile" />
       </div>
       <div class="sh-profile-info-col">
-        <div class="sh-profile-pill">Start Up Name</div>
-        <div class="sh-profile-pill sh-profile-location">Location</div>
+        <div class="sh-profile-pill sh-profile-name">{{ startupName }}</div>
+        <div class="sh-profile-pill sh-profile-location">{{ startupLocation }}</div>
       </div>
       <div class="sh-post-card">
         <h2>Create a Post</h2>

@@ -48,6 +48,12 @@
       font-weight: 600;
       color: var(--primary-color);
 
+      &.sh-profile-name {
+        font-size: 1.4rem;
+        color: var(--text-color);
+        margin-bottom: 0.3rem;
+      }
+
       &.sh-profile-location {
         background: var(--accent-color);
         color: white;

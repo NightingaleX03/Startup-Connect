@@ -58,7 +58,30 @@
             <span class="stat-value">{{ firm.investmentRange }}</span>
           </div>
         </div>
-        <button class="contact-btn">Contact Firm</button>
+        <button class="contact-btn" (click)="openContactModal(firm)">Contact Firm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal-backdrop" *ngIf="showContactModal" (click)="closeContactModal()"></div>
+  <div class="modal" *ngIf="showContactModal && selectedFirm">
+    <div class="modal-header">
+      <span>Contact {{ selectedFirm.name }}</span>
+      <button class="close-btn" (click)="closeContactModal()">&times;</button>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item" *ngIf="selectedFirm.email">
+        <span class="contact-label">Email:</span>
+        <span class="contact-value">{{ selectedFirm.email }}</span>
+      </div>
+      <div class="contact-item" *ngIf="selectedFirm.phone">
+        <span class="contact-label">Phone:</span>
+        <span class="contact-value">{{ selectedFirm.phone }}</span>
+      </div>
+      <div class="contact-item" *ngIf="selectedFirm.linkedin">
+        <span class="contact-label">LinkedIn:</span>
+        <span class="contact-value">{{ selectedFirm.linkedin }}</span>
       </div>
     </div>
   </div>

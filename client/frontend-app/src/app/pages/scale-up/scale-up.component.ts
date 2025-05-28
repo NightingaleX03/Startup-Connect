@@ -3,18 +3,28 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LeaderboardComponent } from '../../components/leaderboard/leaderboard.component';
+import { AuthService } from '../../services/auth.service';
 
 interface Achievement {
   title: string;
   points: number;
 }
+
 interface Tier {
   name: string;
   description: string;
   achievements: Achievement[];
 }
+
 interface AchievementsData {
   tiers: Tier[];
+}
+
+interface Progress {
+  [key: string]: {
+    completed: number;
+    total: number;
+  };
 }
 
 @Component({
@@ -26,15 +36,28 @@ interface AchievementsData {
 })
 export class ScaleUpComponent implements OnInit {
   tiers: Tier[] = [];
-  progress: { [tier: string]: { completed: number, total: number } } = {};
-  showAllTiers: { [tier: string]: boolean } = {};
-  approvalStatus: { [key: string]: 'none' | 'pending' } = {};
-  approvalDialog = { message: '', visible: false };
-  dialogTimeout: any;
+  progress: Progress = {};
+  showAllTiers: { [key: string]: boolean } = {};
+  approvalStatus: { [key: string]: string } = {};
+  approvalDialog = { visible: false, message: '' };
+  currentPoints: number = 0;
+  leaderboardPosition: number = 0;
+  profilePicture: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
+    // Get profile data
+    const profile = this.authService.getProfile();
+    if (profile) {
+      this.currentPoints = profile.points || 0;
+      this.leaderboardPosition = profile.leaderboardPosition || 0;
+      this.profilePicture = profile.avatar || 'https://api.dicebear.com/7.x/avataaars/svg?seed=default';
+    }
+
     this.http.get<AchievementsData>('assets/achievements.json').subscribe(data => {
       this.tiers = data.tiers;
       // Mock progress for demo
@@ -53,10 +76,6 @@ export class ScaleUpComponent implements OnInit {
     });
   }
 
-  toggleShowAll(tierName: string) {
-    this.showAllTiers[tierName] = !this.showAllTiers[tierName];
-  }
-
   getAchKey(tierName: string, index: number): string {
     return `${tierName}-${index}`;
   }
@@ -67,18 +86,19 @@ export class ScaleUpComponent implements OnInit {
     this.showApprovalDialog('Request to approve achievement completion has been sent');
   }
 
+  toggleShowAll(tierName: string) {
+    this.showAllTiers[tierName] = !this.showAllTiers[tierName];
+  }
+
   showApprovalDialog(message: string) {
     this.approvalDialog.message = message;
     this.approvalDialog.visible = true;
-    if (this.dialogTimeout) clearTimeout(this.dialogTimeout);
-    this.dialogTimeout = setTimeout(() => {
+    setTimeout(() => {
       this.hideApprovalDialog();
     }, 3000);
   }
 
   hideApprovalDialog() {
     this.approvalDialog.visible = false;
-    this.approvalDialog.message = '';
-    if (this.dialogTimeout) clearTimeout(this.dialogTimeout);
   }
 } 
