@@ -166,6 +166,24 @@ cd server
 python app.py
 ```
 
+### 3️⃣ Testing Log-in Credentials
+
+## Start-up Credentials
+
+**Username:** startup1
+**Password:** startup123
+
+**Username:** startup2
+**Password:** startup123
+
+## VC Firm Credentials
+
+**Username:** vc1
+**Password:** vc123
+
+**Username:** vc2
+**Password:** vc123
+
 ## 👥 Contributors
 
 <div align="center">
