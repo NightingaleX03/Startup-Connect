@@ -35,8 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'vc-firms',
-    loadComponent: () => import('./pages/vc-firms/vc-firms.component').then(m => m.VcFirmsComponent),
-    canActivate: [AuthGuard]
+    loadComponent: () => import('./pages/vc-firms/vc-firms.component').then(m => m.VcFirmsComponent)
   },
   { path: '**', redirectTo: '' }
 ];

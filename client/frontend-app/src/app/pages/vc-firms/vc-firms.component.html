@@ -1,1 +1,65 @@
-<div class="simple-page-title">VC Firms</div> 
+<section class="vc-firms-page">
+  <div class="container">
+    <h1 class="vc-firms-title">VC Firms</h1>
+    <p class="vc-firms-desc">
+      Discover and connect with venture capital firms that can help fund your startup's growth. 
+      Browse through our curated list of VC firms, each with their investment focus, portfolio, and contact information.
+    </p>
+
+    <div class="filters-container">
+      <div class="search-sort-row">
+        <div class="search-container">
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search VC firms by name, industry, or location..."
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+          >
+        </div>
+        <button class="sort-btn" (click)="toggleSort()" title="{{ sortOrder === 'newest' ? 'Newest First' : 'Oldest First' }}">
+          <span class="sort-icon">☰</span>
+        </button>
+      </div>
+
+      <div class="filter-tags">
+        <span class="filter-label">Filter by:</span>
+        <div class="tags-container">
+          <button 
+            *ngFor="let tag of availableTags" 
+            class="filter-tag"
+            [class.active]="selectedTags.includes(tag)"
+            (click)="toggleTag(tag)"
+          >
+            {{ tag }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-firms-grid">
+      <div class="vc-firm-card" *ngFor="let firm of filteredFirms">
+        <div class="firm-logo">
+          <img [src]="firm.logo" [alt]="firm.name + ' logo'">
+        </div>
+        <h3 class="firm-name">{{ firm.name }}</h3>
+        <p class="firm-location">{{ firm.location }}</p>
+        <div class="firm-tags">
+          <span class="tag" *ngFor="let tag of firm.tags">{{ tag }}</span>
+        </div>
+        <p class="firm-desc">{{ firm.description }}</p>
+        <div class="firm-stats">
+          <div class="stat">
+            <span class="stat-label">Portfolio Size</span>
+            <span class="stat-value">{{ firm.portfolioSize }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Investment Range</span>
+            <span class="stat-value">{{ firm.investmentRange }}</span>
+          </div>
+        </div>
+        <button class="contact-btn">Contact Firm</button>
+      </div>
+    </div>
+  </div>
+</section> 
