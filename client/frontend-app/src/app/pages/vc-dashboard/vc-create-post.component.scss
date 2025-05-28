@@ -39,15 +39,65 @@
 }
 
 .form-control {
+  width: 100%;
   padding: 0.7rem 1rem;
   border-radius: 8px;
   border: 1.5px solid var(--primary-color);
   background: var(--background-color);
   color: var(--text-color);
   font-size: 1rem;
+  box-sizing: border-box;
+}
+
+select.form-control {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+input.form-control, textarea.form-control {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .btn {
-  align-self: flex-end;
+  align-self: stretch;
   margin-top: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-suffix-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-suffix {
+  margin-left: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.investment-range-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.range-separator {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0 0.5rem;
+}
+
+textarea.form-control {
+  min-height: 80px;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
 } 

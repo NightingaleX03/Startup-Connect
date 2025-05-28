@@ -18,8 +18,7 @@ import { FormsModule } from '@angular/forms';
       <div class="form-group">
         <label>Tags</label>
         <select [(ngModel)]="post.tag" name="tag" class="form-control">
-          <option value="portfolio size">Portfolio Size</option>
-          <option value="investment range">Investment Range</option>
+          <option *ngFor="let option of tagOptions" [value]="option">{{ option }}</option>
         </select>
       </div>
       <div class="form-group">
@@ -34,6 +33,22 @@ import { FormsModule } from '@angular/forms';
         <label>LinkedIn</label>
         <input type="text" [(ngModel)]="post.linkedin" name="linkedin" class="form-control">
       </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="post.description" name="description" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Portfolio Size</label>
+        <input type="text" [(ngModel)]="post.portfolioSize" name="portfolioSize" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Investment Range (Min)</label>
+        <input type="text" [(ngModel)]="post.investmentMin" name="investmentMin" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Investment Range (Max)</label>
+        <input type="text" [(ngModel)]="post.investmentMax" name="investmentMax" class="form-control">
+      </div>
       <button type="submit" class="btn">Create Post</button>
     </form>
   `,
@@ -45,10 +60,25 @@ export class VcCreatePostComponent {
     firm: 'Angular Ventures',
     location: 'San Francisco, CA'
   };
+  tagOptions = [
+    'Technology',
+    'Healthcare',
+    'Consumer',
+    'Software',
+    'Fintech',
+    'Crypto',
+    'Startups',
+    'Accelerator',
+    'Early Stage'
+  ];
   post = {
-    tag: 'portfolio size',
+    tag: 'Technology',
     email: '',
     phone: '',
-    linkedin: ''
+    linkedin: '',
+    description: '',
+    portfolioSize: '',
+    investmentMin: '',
+    investmentMax: ''
   };
 } 
