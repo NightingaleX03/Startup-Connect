@@ -103,19 +103,17 @@ export class VcFirmsComponent implements OnInit {
   applyFilters() {
     let filtered = [...this.firms];
 
-    // Apply search filter
+    // Apply search filter - only search through titles
     if (this.searchQuery) {
       const query = this.searchQuery.toLowerCase();
       filtered = filtered.filter(firm => 
-        firm.name.toLowerCase().includes(query) ||
-        firm.location.toLowerCase().includes(query) ||
-        firm.tags.some(tag => tag.toLowerCase().includes(query))
+        firm.name.toLowerCase().includes(query)
       );
     }
 
     // Apply tag filters
     if (this.selectedTags.length > 0) {
-      filtered = filtered.filter(firm =>
+      filtered = filtered.filter(firm => 
         this.selectedTags.some(tag => firm.tags.includes(tag))
       );
     }
