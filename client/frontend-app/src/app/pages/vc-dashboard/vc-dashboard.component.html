@@ -1,0 +1,57 @@
+<div class="vc-dashboard-page">
+  <h1 class="dashboard-title">Dashboard</h1>
+  <div class="dashboard-row">
+    <div class="profile-card">
+      <app-vc-profile-card></app-vc-profile-card>
+    </div>
+    <div class="create-post-card">
+      <app-vc-create-post></app-vc-create-post>
+    </div>
+  </div>
+  <div class="posts-row">
+    <div class="posts-card">
+      <div class="posts-header">
+        <span>Posts</span>
+      </div>
+      <div class="vc-posts-list-section">
+        <div class="vc-posts-list-grid">
+          <div class="vc-firm-card" *ngFor="let post of posts">
+            <div class="firm-logo">
+              <img [src]="post.logo" [alt]="post.title + ' logo'">
+            </div>
+            <h3 class="firm-name">{{ post.title }}</h3>
+            <p class="firm-location">{{ post.location }}</p>
+            <div class="firm-tags">
+              <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+            </div>
+            <p class="firm-desc">{{ post.description }}</p>
+            <div class="firm-stats">
+              <div class="stat">
+                <span class="stat-label">Portfolio Size</span>
+                <span class="stat-value">{{ post.portfolioSize }}</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Investment Range</span>
+                <span class="stat-value">{{ post.investmentRange }}</span>
+              </div>
+            </div>
+            <button class="contact-btn" (click)="openApplicants(post)">
+              See list of those who applied
+            </button>
+          </div>
+        </div>
+        <!-- Modal for applicants -->
+        <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+        <div class="modal" *ngIf="showModal">
+          <div class="modal-header">
+            <span>Applicants for {{ selectedPost?.title }}</span>
+            <button class="close-btn" (click)="closeModal()">&times;</button>
+          </div>
+          <ul class="applicants-list">
+            <li *ngFor="let applicant of applicants">{{ applicant }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

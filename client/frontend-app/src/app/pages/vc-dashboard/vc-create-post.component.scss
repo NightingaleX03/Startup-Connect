@@ -1,0 +1,53 @@
+.vc-create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.vc-pfp {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+  background: var(--background-color);
+}
+
+.vc-firm-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.vc-location {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 0.97rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-control {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--primary-color);
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.btn {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+} 

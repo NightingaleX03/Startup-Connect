@@ -1,0 +1,32 @@
+.vc-profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--secondary-color);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.vc-pfp {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 2px solid var(--primary-color);
+  background: var(--background-color);
+}
+
+.vc-firm-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.vc-location {
+  color: var(--text-color);
+  opacity: 0.8;
+  font-size: 1rem;
+} 

@@ -1,0 +1,32 @@
+.vc-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.post-card {
+  background: var(--background-color);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.post-contact {
+  font-size: 0.97rem;
+  opacity: 0.85;
+}
+
+.see-more-btn {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+} 
