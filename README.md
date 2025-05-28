@@ -56,6 +56,90 @@
 
 ---
 
+## ⚙️ Overview
+
+As you login you're greated with the home page:
+
+<div align="center">
+  
+https://github.com/user-attachments/assets/5a0d57d8-6baa-4f21-9604-48f38c72b6d3
+  
+</div>
+
+Here is the User sign-in / user log-in page where users can register either as a vc firm or a startup, each accounts having their own individual functionality:
+
+<div align="center">
+  
+https://github.com/user-attachments/assets/3afaf6cb-9ed7-4705-814f-857944467d18
+
+</div>
+
+---
+
+### ⚙️ Start-up Account
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/2bcd1a79-7618-477e-b162-76bd3685d3c4
+
+</div>
+
+Text:
+
+<div align="center">
+  
+https://github.com/user-attachments/assets/db189d10-efea-4df9-aedc-1012de50e1d8
+
+</div>
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/2a812a4d-e421-495e-a7e5-f03bc512cc15
+
+</div>
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/4d01a0c4-a015-4a7d-991c-5279835a9abf
+
+</div>
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/dbb1ee80-f7ae-4c04-916f-81a28d2587d1
+
+</div>
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/dbb1ee80-f7ae-4c04-916f-81a28d2587d1
+
+</div>
+
+---
+
+### ⚙️ VC-Firm Account
+
+Text:
+
+<div align="center">
+
+https://github.com/user-attachments/assets/756e3537-26a8-48ac-a161-9507e21a2a7a
+
+</div>
+
+---
+
 ## 📦 Prerequisites
 
 Before starting, ensure the following are installed:
@@ -67,10 +151,6 @@ Before starting, ensure the following are installed:
 - [pip](https://pip.pypa.io/en/stable/)
 
   ---
-
-## ⚙️ Overview
-
----
 
 ## ⚙️ Installation
 
