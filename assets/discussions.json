@@ -1,0 +1,108 @@
+[
+  {
+    "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=StartupUser1",
+    "date": "2024-03-20T06:30:00.000Z",
+    "title": "Looking for Co-founders in AI Space",
+    "tags": ["Startups & Business", "Programming & Development"],
+    "description": "We're building an AI-powered platform for **automated content generation** and looking for co-founders with experience in: * Machine Learning * Full-stack Development * Product Management Our MVP is ready and we have initial traction. Let's connect!",
+    "startupName": "AI Innovators",
+    "replies": [
+      {
+        "text": "This sounds amazing! I'm interested in the Machine Learning part.",
+        "startupName": "ML Pros",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=MLPros",
+        "date": "2024-03-20T08:00:00.000Z"
+      },
+      {
+        "text": "We have experience in product management and would love to collaborate.",
+        "startupName": "Product Gurus",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=ProductGurus",
+        "date": "2024-03-20T09:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechStartup2",
+    "date": "2024-03-19T15:45:00Z",
+    "title": "Cybersecurity Best Practices for Startups",
+    "tags": ["Cybersecurity", "Startups & Business"],
+    "description": "Sharing our experience with implementing security measures:\n\n1. Use **2FA** for all accounts\n2. Regular security audits\n3. Employee training programs\n\nWhat other measures do you recommend?",
+    "replies": [
+      {
+        "text": "This sounds amazing! I'm interested in the Machine Learning part.",
+        "startupName": "ML Pros",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=MLPros",
+        "date": "2024-03-20T08:00:00.000Z"
+      },
+      {
+        "text": "We have experience in product management and would love to collaborate.",
+        "startupName": "Product Gurus",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=ProductGurus",
+        "date": "2024-03-20T09:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechStartup3",
+    "date": "2024-03-18T09:15:00Z",
+    "title": "VR Gaming Platform Launch",
+    "tags": ["Gaming & VR", "Gadgets & Hardware"],
+    "description": "Excited to announce our *VR gaming platform* launch! Features include:\n\n* Cross-platform compatibility\n* Social gaming features\n* Custom avatar creation\n\nJoin our beta testing program!",
+    "replies": [
+      {
+        "text": "This sounds amazing! I'm interested in the Machine Learning part.",
+        "startupName": "ML Pros",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=MLPros",
+        "date": "2024-03-20T08:00:00.000Z"
+      },
+      {
+        "text": "We have experience in product management and would love to collaborate.",
+        "startupName": "Product Gurus",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=ProductGurus",
+        "date": "2024-03-20T09:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechStartup4",
+    "date": "2024-03-17T14:20:00Z",
+    "title": "Hardware Development Challenges",
+    "tags": ["Gadgets & Hardware", "General Tech"],
+    "description": "Facing challenges with our IoT device development:\n\n* Power consumption optimization\n* Wireless connectivity issues\n* Manufacturing scalability\n\nAny hardware experts here who can help?",
+    "replies": [
+      {
+        "text": "This sounds amazing! I'm interested in the Machine Learning part.",
+        "startupName": "ML Pros",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=MLPros",
+        "date": "2024-03-20T08:00:00.000Z"
+      },
+      {
+        "text": "We have experience in product management and would love to collaborate.",
+        "startupName": "Product Gurus",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=ProductGurus",
+        "date": "2024-03-20T09:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=TechStartup5",
+    "date": "2024-03-16T11:00:00Z",
+    "title": "Tech Stack Recommendations",
+    "tags": ["Programming & Development", "General Tech"],
+    "description": "Planning to build a **scalable web application**. Considering:\n\n* Frontend: React/Next.js\n* Backend: Node.js/Express\n* Database: PostgreSQL\n\nWould love to hear your experiences with these technologies!",
+    "replies": [
+      {
+        "text": "This sounds amazing! I'm interested in the Machine Learning part.",
+        "startupName": "ML Pros",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=MLPros",
+        "date": "2024-03-20T08:00:00.000Z"
+      },
+      {
+        "text": "We have experience in product management and would love to collaborate.",
+        "startupName": "Product Gurus",
+        "pfp": "https://api.dicebear.com/7.x/avataaars/svg?seed=ProductGurus",
+        "date": "2024-03-20T09:15:00.000Z"
+      }
+    ]
+  }
+] 
