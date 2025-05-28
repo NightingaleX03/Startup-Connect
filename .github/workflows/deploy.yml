@@ -5,9 +5,18 @@ on:
     branches:
       - main  # Set this to your default branch
 
+# Add permissions block
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v3
       
@@ -27,7 +36,9 @@ jobs:
           npm run build -- --configuration production --base-href="/perplexity-hackathon/"
         
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: client/frontend-app/dist/frontend-app
-          branch: gh-pages 
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }} 
