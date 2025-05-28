@@ -28,10 +28,10 @@
           <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/startup/mental-health']" routerLinkActive="active">Mental Health</a>
+          <a class="nav-link" [routerLink]="['/startup/mental-health', user.username]" routerLinkActive="active">Mental Health</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/startup/social-hub']" routerLinkActive="active">Social Hub</a>
+          <a class="nav-link" [routerLink]="['/startup/social-hub', user.username]" routerLinkActive="active">Social Hub</a>
         </li>
       </ul>
 

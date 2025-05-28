@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 interface Discussion {
   pfp: string;
@@ -59,11 +61,22 @@ export class SocialHubComponent implements OnInit, OnDestroy {
   replyText: string = '';
   replyError: string = '';
 
-  constructor(private http: HttpClient) {}
+  username: string = '';
+
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.loadDiscussions();
     document.addEventListener('click', this.handleOutsideClick);
+
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
+
   }
 
   ngOnDestroy() {

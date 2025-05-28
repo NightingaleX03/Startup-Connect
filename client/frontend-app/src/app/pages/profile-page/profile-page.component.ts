@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { StartupProfileCardComponent } from '../../components/startup-profile-card/startup-profile-card.component';
 import { EntryModalComponent } from '../../components/entry-modal/entry-modal.component';
 import { StartupProfileInformationComponent } from '../../components/startup-profile-information/startup-profile-information.component';
+import { StartupProfileService } from '../../components/startup-profile-information/startup-profile-information.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -24,12 +25,12 @@ export class ProfilePageComponent implements OnInit{
   happinessScore = 7.5; // Placeholder value
   pitchText = '';
   pitchPreview = '';
+  responseText: string = '';
   entryModalOpen = false;
   editProfileMode = false;
 
   username: string = '';
-
-  private route = inject(ActivatedRoute)
+  userType: string = localStorage.getItem('userType') || 'startup'; 
 
   // --- Calendar grid logic ---
   daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -72,7 +73,10 @@ export class ProfilePageComponent implements OnInit{
     return this.todayScores[key];
   }
 
-  constructor() {
+  constructor(
+    private startupProfileService: StartupProfileService,
+    private route: ActivatedRoute,
+  ) {
     this.month = this.today.getMonth();
     this.year = this.today.getFullYear();
     this.buildCalendar();
@@ -167,12 +171,12 @@ export class ProfilePageComponent implements OnInit{
     return null;
   }
 
-  // --- Pitch deck logic ---
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const reader = new FileReader();
+
       reader.onload = () => {
         if (file.type.includes('json') || file.type.includes('csv') || file.type.includes('text')) {
           this.pitchPreview = reader.result as string;
@@ -198,9 +202,22 @@ export class ProfilePageComponent implements OnInit{
       alert('Please upload a file or enter your pitch.');
       return;
     }
-    alert('Pitch sent!\n' + pitchString.substring(0, 200) + (pitchString.length > 200 ? '...' : ''));
-    this.pitchText = '';
-    this.pitchPreview = '';
+
+    const payload = { pitchText: this.pitchPreview };
+
+    this.startupProfileService.getPitchDeck(payload).subscribe({
+      next: (res: any) => {
+        this.responseText = res['response'];
+        console.log('Response:', this.responseText);
+        this.pitchText = '';
+        this.pitchPreview = '';
+      },
+      error: (error) => {
+        console.error('Error sending pitch:', error);
+        alert('Failed to send pitch. Please try again.');
+      }
+    });
+
   }
 
   openEntryModal() {
