@@ -109,7 +109,7 @@ python app.py
     <td align="center">
       <a href="https://www.linkedin.com/in/rosie-khurmi-62b20a210/">
         <img src="https://avatars.githubusercontent.com/RosieKhurmi?v=4" width="100" alt="Rosie Khurmi"/><br />
-        <sub><b>Jane Doe</b></sub>
+        <sub><b>Rosie Khurmi</b></sub>
       </a>
     </td>
   </tr>
