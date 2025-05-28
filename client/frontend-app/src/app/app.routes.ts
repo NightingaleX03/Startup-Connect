@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -31,8 +29,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'social-hub',
-    loadComponent: () => import('./pages/social-hub/social-hub.component').then(m => m.SocialHubComponent),
+    path: 'startup/social-hub/:username',
+    component: SocialHubComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -8,20 +8,25 @@
     </div>
 
     <!-- Pitch Deck Section -->
-    <div class="div2">
+    <div *ngIf="userType === 'startup'" class="div2">
       <div class="pitch-title">Pitch Deck</div>
       <div class="pitch-desc">
         Leverage our advanced AI-driven platform to craft a compelling and professional pitch for your startup, ensuring you stand out to investors and partners.
       </div>
       <div class="pitch-upload">
-        <input type="file" (change)="onFileSelected($event)" accept=".pdf,.json,.csv" />
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf,.json,.csv,.txt" />
         <div class="or-divider">or</div>
         <textarea [(ngModel)]="pitchText" placeholder="Type or paste your pitch here..."></textarea>
         <button class="btn btn-primary" (click)="sendPitch()">Send</button>
         <div class="pitch-preview" *ngIf="pitchPreview">
           <strong>Preview:</strong>
           <pre>{{ pitchPreview }}</pre>
+        </div> 
+        <div class="pitch-preview" *ngIf="responseText">
+          <strong>Response:</strong>
+          <pre>{{ responseText }}</pre>
         </div>
+        <div></div>
       </div>
     </div>
 
@@ -77,7 +82,7 @@
       <ul class="quick-links-list">
         <li><a routerLink="/scale-up">Scale Up</a></li>
         <li><a routerLink="/social-hub">Social Hub</a></li>
-        <li><a routerLink="/vc-firms">VC Firms</a></li>
+        <li *ngIf="userType === 'startup'"><a routerLink="/vc-firms">VC Firms</a></li>
       </ul>
     </div>
   </div>

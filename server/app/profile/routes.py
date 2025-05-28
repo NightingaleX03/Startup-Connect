@@ -1,8 +1,9 @@
 from .models import StartupProfile
 from auth import User
-from flask import Blueprint, request, jsonify, url_for
+from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_required
 from database import db
+from config import client
 
 profile = Blueprint('profile', __name__)
 
@@ -78,3 +79,28 @@ def get_startup_profile():
         "linkedin": startupProfile.linkedin,
         "email": user.email,
     }})
+@profile.route('/startup-pitch', methods=['POST'])
+@login_required
+def startup_pitch():
+
+    data = request.get_json()
+    prompt = data['pitchText']
+
+    if not prompt:
+        return jsonify({"error": "Missing pitch text"}), 400
+    
+    try:
+        response = client.chat.completions.create(
+            model="sonar-pro",
+            messages=[
+                {"role": "system", "content": "You are a startup pitch evaluator. Provide a concise and constructive evaluation of the pitch."},
+                {"role": "user", "content": prompt}
+            ],
+        )
+
+        final = response.choices[0].message.content
+
+        return jsonify({"response": final}), 200
+
+    except Exception as e:
+        return jsonify({"error": "An error occurred while processing the request"}), 500

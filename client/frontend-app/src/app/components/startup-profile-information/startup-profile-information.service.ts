@@ -16,4 +16,8 @@ export class StartupProfileService {
         return this.http.get(`${this.baseUrl}/get-profile`, { withCredentials: true });
     }
 
+    getPitchDeck(pitchText: any) {
+        return this.http.post(`${this.baseUrl}/startup-pitch`, pitchText , { withCredentials: true });
+    }
+
 }
